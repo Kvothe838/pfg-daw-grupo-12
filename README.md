@@ -13,6 +13,6 @@ Luego abrir un navegador y acceder mediante localhost:8080/
 
 ## Endpoints en funcionamiento
 
-POST /registro
-POST /acceso
-GET /planes-ejercicio
+- POST /registro
+- POST /acceso
+- GET /planes-ejercicio
