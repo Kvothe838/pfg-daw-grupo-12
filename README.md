@@ -17,3 +17,7 @@ Luego abrir un navegador y acceder mediante localhost:8080/
 - POST /registro
 - POST /acceso
 - GET /planes-ejercicio
+
+### Diagrama Entidad Relación 
+
+A continuación se enlaza al DER correspondiente de la base de datos del projecto: https://dbdiagram.io/d/TFG-66423f8d9e85a46d55ba6f14
