@@ -9,7 +9,7 @@ import (
 
 var users = make([]models.User, 0)
 
-func Registrar(username, password string) error {
+func Register(username, password string) error {
 	usernameAlreadyRegistered := slices.ContainsFunc(users, func(user models.User) bool {
 		return user.Username == username
 	})
@@ -28,7 +28,7 @@ func Registrar(username, password string) error {
 	return nil
 }
 
-func Acceder(username, password string) error {
+func Login(username, password string) error {
 	user, found := lo.Find(users, func(user models.User) bool {
 		return user.Username == username
 	})
