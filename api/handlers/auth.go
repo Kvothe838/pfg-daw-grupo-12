@@ -5,12 +5,28 @@ import (
 	"github.com/gin-gonic/gin"
 	"net/http"
 	"pfg-daw-grupo-12-backend/internal/errors"
-	"pfg-daw-grupo-12-backend/internal/services"
+	"pfg-daw-grupo-12-backend/internal/models"
 )
 
-func Registrar(ctx *gin.Context) {
+type authService interface {
+	Login(email, password string) error
+	Register(email, password string) error
+}
+
+type planesEjerciciosService interface {
+	GetAll() ([]models.PlanEjercicio, error)
+}
+
+func NewInteractor(auth authService, planesEjercicios planesEjerciciosService) interactor {
+	return interactor{
+		auth:             auth,
+		planesEjercicios: planesEjercicios,
+	}
+}
+
+func (i interactor) Register(ctx *gin.Context) {
 	var request struct {
-		Username string `json:"username"`
+		Email    string `json:"email"`
 		Password string `json:"password"`
 	}
 
@@ -20,7 +36,7 @@ func Registrar(ctx *gin.Context) {
 		return
 	}
 
-	err = services.Registrar(request.Username, request.Password)
+	err = i.auth.Register(request.Email, request.Password)
 	if err != nil {
 		if err == errors.ExistentUserErr {
 			ctx.AbortWithStatusJSON(http.StatusConflict, gin.H{
@@ -30,7 +46,7 @@ func Registrar(ctx *gin.Context) {
 		}
 
 		ctx.AbortWithStatus(http.StatusInternalServerError)
-		fmt.Println("error registering user: ", err)
+		fmt.Println("error registrando usuario: ", err)
 		return
 	}
 
@@ -38,9 +54,9 @@ func Registrar(ctx *gin.Context) {
 
 }
 
-func Acceder(ctx *gin.Context) {
+func (i interactor) Login(ctx *gin.Context) {
 	var request struct {
-		Username string `json:"username"`
+		Email    string `json:"email"`
 		Password string `json:"password"`
 	}
 
@@ -50,10 +66,10 @@ func Acceder(ctx *gin.Context) {
 		return
 	}
 
-	err = services.Acceder(request.Username, request.Password)
+	err = i.auth.Login(request.Email, request.Password)
 	if err == errors.LoginFailedErr {
 		ctx.AbortWithStatusJSON(http.StatusUnauthorized, gin.H{
-			"message": "username or password incorrect",
+			"message": "nombre de usuario o contraseña incorrecto",
 		})
 	}
 }
