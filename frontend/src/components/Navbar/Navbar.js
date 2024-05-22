@@ -1,6 +1,12 @@
-import React from 'react';
+import React, { useState } from 'react';
 
 const Navbar = ({ email, onLogout }) => {
+  const [showLogout, setShowLogout] = useState(false);
+
+  const handleProfileClick = () => {
+    setShowLogout(!showLogout);
+  };
+
   return (
     <nav className="navbar">
       <div className="logo">MyApp</div>
@@ -15,13 +21,11 @@ const Navbar = ({ email, onLogout }) => {
             <a href="/nutritional-guide">Nutritional Guide</a>
           </div>
         </div>
-        {email ? (
-          <div className="profile">
+        {email && (
+          <div className="profile" onClick={handleProfileClick}>
             {email.charAt(0).toUpperCase()}
-            <div className="logout" onClick={onLogout}>Logout</div>
+            {showLogout && <div className="logout" onClick={onLogout}>Logout</div>}
           </div>
-        ) : (
-          <a href="/login" onClick={(e) => e.preventDefault()}>Login</a>
         )}
       </div>
     </nav>

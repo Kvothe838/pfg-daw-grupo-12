@@ -5,31 +5,27 @@ import './index.css';
 
 const App = () => {
   const [user, setUser] = useState(null);
-  const [showLogin, setShowLogin] = useState(false);
+  const [showLoginForm, setShowLoginForm] = useState(false);
 
   const handleLogin = (email) => {
     setUser({ email });
-    setShowLogin(false);
+    setShowLoginForm(false);
   };
 
   const handleLogout = () => {
     setUser(null);
+    setShowLoginForm(false);
   };
 
   return (
     <div>
-      <Navbar email={user?.email} onLogout={handleLogout} />
-      {user ? (
-        <div>Welcome, {user.email}</div>
-      ) : (
-        showLogin ? (
-          <LoginForm onLogin={handleLogin} />
-        ) : (
-          <div style={{ textAlign: 'center', marginTop: '50px' }}>
-            <button onClick={() => setShowLogin(true)}>Login</button>
-          </div>
-        )
+      {!user && !showLoginForm && (
+        <div className="container">
+          <button onClick={() => setShowLoginForm(true)}>Login</button>
+        </div>
       )}
+      {showLoginForm && <LoginForm onLogin={handleLogin} />}
+      {user && <Navbar email={user.email} onLogout={handleLogout} />}
     </div>
   );
 };
