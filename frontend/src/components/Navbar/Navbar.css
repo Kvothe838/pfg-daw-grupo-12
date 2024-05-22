@@ -2,12 +2,12 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
-  background-color: #333;
+  background-color: #82c91e;  /* Changed to a pastel green color */
   padding: 1rem;
 }
 
 .logo {
-  color: #fff;
+  color: #fff;  /* Kept white for good contrast */
   font-size: 1.5rem;
   text-transform: uppercase;
   letter-spacing: 2px;
@@ -24,35 +24,38 @@
 }
 
 .nav-links a {
-  color: #fff;
+  color: #fff;  /* Kept white for consistency */
   text-decoration: none;
   padding: 0.5rem 1rem;
   display: block;
+  background-color: #b2f2bb;  /* Pastel green button color */
+  border-radius: 4px;
 }
 
 .nav-links a:hover {
-  background-color: #575757;
-  border-radius: 4px;
+  background-color: #d3f9d8;  /* Lighter pastel green on hover */
 }
 
 .dropdown-content {
   display: none;
   position: absolute;
-  background-color: #333;
+  background-color: #b2f2bb;  /* Same pastel green as buttons */
   min-width: 160px;
   box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
   z-index: 1;
+  border-radius: 4px;
 }
 
 .dropdown-content a {
-  color: white;
+  color: white;  /* White text for contrast */
   padding: 12px 16px;
   text-decoration: none;
   display: block;
+  background-color: #b2f2bb;  /* Same pastel green as buttons */
 }
 
 .dropdown-content a:hover {
-  background-color: #575757;
+  background-color: #d3f9d8;  /* Lighter pastel green on hover */
 }
 
 .dropdown:hover .dropdown-content {
