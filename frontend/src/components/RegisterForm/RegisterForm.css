@@ -1,32 +1,41 @@
-  .{
-
-  }
-  .register-container {
-    position: relative;
-    width: 100%;
-    height: 100%;
+/* Apply background image and make it cover the entire screen */
+body {
+    font-family: Arial, sans-serif;
+    background-image: url('../../assets/register-bck.jpeg');
+    background-size: cover;
+    background-position: center;
+    margin: 0;
+    padding: 0;
+    height: 100vh;
     display: flex;
     justify-content: center;
     align-items: center;
   }
   
+  /* Apply blur to the entire background */
   .background {
     position: absolute;
     top: 0;
     left: 0;
     width: 100%;
     height: 100%;
-    background-image: url('../../assets/register-bck.jpeg'); /* Update the path */
-    background-size: cover;
-    background-position: center;
-    filter: blur(5px); /* Blurs only the background */
-    z-index: 1;
+    filter: blur(5px);
+    background: rgba(255, 255, 255, 0.199);
+    z-index: 1; /* Set z-index to make sure it's behind the form */
+  }
+  
+  .register-container {
+    position: relative;
+    z-index: 2; /* Set z-index to make sure it's above the blurred background */
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
   }
   
   .register-form {
-    position: relative;
-    z-index: 2; /* Ensures content is above the blurred background */
-    background: rgba(255, 255, 255, 0.9); /* Transparent background */
+    background: rgba(255, 255, 255, 0.8); /* Set background color with opacity for transparency */
     padding: 40px;
     border-radius: 10px;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
@@ -41,9 +50,8 @@
   }
   
   .error {
-    color: rgb(203, 42, 98);
+    color: red;
     margin-bottom: 10px;
-    font-size: 1.3rem;
   }
   
   label {
@@ -59,5 +67,28 @@
     border-radius: 5px;
     border: 1px solid #ccc;
     box-sizing: border-box;
+  }
+  
+  button {
+    background: linear-gradient(45deg, #6a11cb, #2575fc);
+    color: white;
+    border: none;
+    border-radius: 25px;
+    padding: 10px 25px;
+    cursor: pointer;
+    font-size: 1rem;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  }
+  
+  button:hover {
+    background: linear-gradient(45deg, #2575fc, #6a11cb);
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2);
+    transform: translateY(-2px);
+  }
+  
+  button:active {
+    transform: translateY(0);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
   }
   
