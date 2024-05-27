@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import './Navbar.css';
 
 const Navbar = ({ email, onLogout }) => {
   const [showLogout, setShowLogout] = useState(false);
