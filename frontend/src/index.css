@@ -1,6 +1,5 @@
 body {
   font-family: Arial, sans-serif;
-  background-color: #f4f4f9;
   margin: 0;
   padding: 0;
 }
@@ -69,7 +68,7 @@ body {
   display: none;
   position: absolute;
   right: 0;
-  top: calc(100% + 10px);
+  top: calc(100% );
   background-color: white;
   color: #4a4a8a;
   padding: 10px 15px; /* Increase padding to increase button size */

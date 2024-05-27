@@ -56,7 +56,7 @@ const RegisterForm = ({ onRegister }) => {
 
   return (
     <div className="register-container">
-      <div className="background-overlay"></div>
+      <div className="background"></div>
       <div className="register-form">
         <h2>Create Account</h2>
         {error && <div className="error">{error}</div>}

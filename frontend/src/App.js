@@ -1,9 +1,9 @@
 import React, { useState } from 'react';
 import Navbar from '../src/components/Navbar/Navbar';
 import LoginForm from '../src/components/Login/Login';
-import './index.css';
 import Welcome from '../src/components/Welcome/Welcome';
-
+import RegisterForm from '../src/components/RegisterForm/RegisterForm';
+import './index.css';
 
 const App = () => {
   const [user, setUser] = useState(null);
@@ -13,6 +13,12 @@ const App = () => {
   const handleLogin = (email) => {
     setUser({ email });
     setShowLoginForm(false);
+    setShowRegisterForm(false);
+  };
+
+  const handleRegister = (data) => {
+    setUser(null);
+    setShowLoginForm(true); // Show login form after successful registration
     setShowRegisterForm(false);
   };
 
@@ -38,7 +44,7 @@ const App = () => {
         <Welcome onLoginClick={handleLoginClick} onRegisterClick={handleRegisterClick} />
       )}
       {showLoginForm && <LoginForm onLogin={handleLogin} />}
-      {showRegisterForm && <div>Register Form Placeholder</div>}
+      {showRegisterForm && <RegisterForm onRegister={handleRegister} />}
       {user && <Navbar email={user.email} onLogout={handleLogout} />}
     </div>
   );
