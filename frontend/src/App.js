@@ -10,10 +10,9 @@ const App = () => {
   const [showLoginForm, setShowLoginForm] = useState(false);
   const [showRegisterForm, setShowRegisterForm] = useState(false);
 
-  const handleLogin = (email) => {
-    setUser({ email });
+  const handleLogin = (email, password) => {
+    setUser({ email, password });
     setShowLoginForm(false);
-    setShowRegisterForm(false);
   };
 
   const handleRegister = (data) => {

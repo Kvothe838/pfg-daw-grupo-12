@@ -55,6 +55,10 @@ func (i interactor) Register(ctx *gin.Context) {
 }
 
 func (i interactor) Login(ctx *gin.Context) {
+	ctx.Header("Access-Control-Allow-Origin", "*")
+	ctx.Header("Access-Control-Allow-Methods", "DELETE, POST, GET, OPTIONS")
+	ctx.Header("Access-Control-Allow-Headers", "Content-Type, Authorization, X-Requested-With")
+
 	var request struct {
 		Email    string `json:"email"`
 		Password string `json:"password"`
@@ -62,14 +66,22 @@ func (i interactor) Login(ctx *gin.Context) {
 
 	err := ctx.BindJSON(&request)
 	if err != nil {
-		ctx.AbortWithStatus(http.StatusBadRequest)
+		ctx.AbortWithStatusJSON(http.StatusBadRequest, gin.H{"message": "Invalid request"})
 		return
 	}
 
 	err = i.auth.Login(request.Email, request.Password)
-	if err == errors.LoginFailedErr {
-		ctx.AbortWithStatusJSON(http.StatusUnauthorized, gin.H{
-			"message": "nombre de usuario o contraseña incorrecto",
-		})
+	if err != nil {
+		if err == errors.LoginFailedErr {
+			ctx.AbortWithStatusJSON(http.StatusUnauthorized, gin.H{
+				"message": "nombre de usuario o contraseña incorrecto",
+			})
+			return
+		}
+
+		ctx.AbortWithStatusJSON(http.StatusInternalServerError, gin.H{"message": "Internal server error"})
+		return
 	}
+
+	ctx.JSON(http.StatusOK, gin.H{"message": "Login successful"})
 }

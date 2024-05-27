@@ -7,7 +7,12 @@ import (
 	"slices"
 )
 
-var users = make([]models.User, 0)
+var users = []models.User{
+	{
+		Email:    "example@gmail.com",
+		Password: "Random123.",
+	},
+}
 
 type auth struct {
 }
@@ -16,9 +21,9 @@ func NewAuth() auth {
 	return auth{}
 }
 
-func (a auth) Register(username, password string) error {
+func (a auth) Register(email, password string) error {
 	usernameAlreadyRegistered := slices.ContainsFunc(users, func(user models.User) bool {
-		return user.Username == username
+		return user.Email == email
 	})
 
 	if usernameAlreadyRegistered {
@@ -26,7 +31,7 @@ func (a auth) Register(username, password string) error {
 	}
 
 	newUser := models.User{
-		Username: username,
+		Email:    email,
 		Password: password,
 	}
 
@@ -35,9 +40,9 @@ func (a auth) Register(username, password string) error {
 	return nil
 }
 
-func (a auth) Login(username, password string) error {
+func (a auth) Login(email, password string) error {
 	user, found := lo.Find(users, func(user models.User) bool {
-		return user.Username == username
+		return user.Email == email
 	})
 
 	if !found {

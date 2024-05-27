@@ -16,15 +16,41 @@ const LoginForm = ({ onLogin }) => {
   const handleSubmit = (e) => {
     e.preventDefault();
     if (!validateEmail(email)) {
-      setError('Invalid email format.');
+      setError('Formato de email inválido.');
       return;
     }
     if (!validatePassword(password)) {
-      setError('Password must be at least 7 characters long, contain an uppercase letter and a number.');
+      setError('La contraseña debe tener al menos 7 caracteres de longitud, contener una letra mayúscula y un número.');
       return;
     }
+
     setError('');
-    onLogin(email);
+    const url = 'http://localhost:8080/login';
+    const requestOptions = {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ email, password })
+    };
+
+    fetch(url, requestOptions)
+        .then(response => {
+          if (!response.ok) {
+            if (response.status === 401) {
+              throw new Error('Email o contraseña incorrectos');
+            } else {
+              throw new Error('Login failed');
+            }
+          }
+          return response.json();
+        })
+        .then(data => {
+          console.log('Login successful', data);
+          onLogin(email, password);
+        })
+        .catch(error => {
+          setError(error.message);
+          console.log('Form submit error', error);
+        });
   };
 
   return (
