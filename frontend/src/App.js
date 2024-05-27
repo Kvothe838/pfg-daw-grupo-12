@@ -7,9 +7,9 @@ const App = () => {
   const [user, setUser] = useState(null);
   const [showLoginForm, setShowLoginForm] = useState(false);
 
-  const handleLogin = (email) => {
-    setUser({ email });
+  const handleLogin = (email, password) => {
     setShowLoginForm(false);
+    setUser({ email, password });
   };
 
   const handleLogout = () => {
