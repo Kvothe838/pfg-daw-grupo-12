@@ -2,32 +2,34 @@ package api
 
 import (
 	"fmt"
+	"github.com/dgrijalva/jwt-go"
 	"github.com/gin-gonic/gin"
 	"net/http"
 	"pfg-daw-grupo-12-backend/internal/errors"
 	"pfg-daw-grupo-12-backend/internal/models"
+	"pfg-daw-grupo-12-backend/internal/services"
 )
 
 type authService interface {
-	Login(email, password string) error
-	Register(email, password string) error
+	Login(email, contrasenia string) (string, error)
+	Register(email, contrasenia string) error
 }
 
 type planesEjerciciosService interface {
 	GetAll() ([]models.PlanEjercicio, error)
 }
 
-func NewInteractor(auth authService, planesEjercicios planesEjerciciosService) interactor {
-	return interactor{
+func NewInteractor(auth authService, planesEjercicios planesEjerciciosService) *interactor {
+	return &interactor{
 		auth:             auth,
 		planesEjercicios: planesEjercicios,
 	}
 }
 
-func (i interactor) Register(ctx *gin.Context) {
+func (i *interactor) Register(ctx *gin.Context) {
 	var request struct {
-		Email    string `json:"email"`
-		Password string `json:"password"`
+		Email       string `json:"email"`
+		Contrasenia string `json:"contrasenia"`
 	}
 
 	err := ctx.BindJSON(&request)
@@ -36,9 +38,9 @@ func (i interactor) Register(ctx *gin.Context) {
 		return
 	}
 
-	err = i.auth.Register(request.Email, request.Password)
+	err = i.auth.Register(request.Email, request.Contrasenia)
 	if err != nil {
-		if err == errors.ExistentUserErr {
+		if err == errors.UsuarioExistenteErr {
 			ctx.AbortWithStatusJSON(http.StatusConflict, gin.H{
 				"message": err.Error(),
 			})
@@ -54,27 +56,30 @@ func (i interactor) Register(ctx *gin.Context) {
 
 }
 
-func (i interactor) Login(ctx *gin.Context) {
-	ctx.Header("Access-Control-Allow-Origin", "*")
-	ctx.Header("Access-Control-Allow-Methods", "DELETE, POST, GET, OPTIONS")
-	ctx.Header("Access-Control-Allow-Headers", "Content-Type, Authorization, X-Requested-With")
-
+func (i *interactor) Login(ctx *gin.Context) {
 	var request struct {
-		Email    string `json:"email"`
-		Password string `json:"password"`
+		Email       string `json:"email"`
+		Contrasenia string `json:"contrasenia"`
 	}
 
 	err := ctx.BindJSON(&request)
 	if err != nil {
-		ctx.AbortWithStatusJSON(http.StatusBadRequest, gin.H{"message": "Invalid request"})
+		ctx.AbortWithStatusJSON(http.StatusBadRequest, gin.H{"message": "Solicitud inválida"})
 		return
 	}
 
-	err = i.auth.Login(request.Email, request.Password)
+	if len(request.Email) == 0 || len(request.Contrasenia) == 0 {
+		ctx.AbortWithStatusJSON(http.StatusBadRequest, gin.H{
+			"message": "Email o contrasenia no enviados",
+		})
+		return
+	}
+
+	token, err := i.auth.Login(request.Email, request.Contrasenia)
 	if err != nil {
-		if err == errors.LoginFailedErr {
+		if err == errors.FalloLoginErr || err == errors.SesionExpiradaErr {
 			ctx.AbortWithStatusJSON(http.StatusUnauthorized, gin.H{
-				"message": "nombre de usuario o contraseña incorrecto",
+				"message": "Nombre de usuario o contraseña incorrecto",
 			})
 			return
 		}
@@ -83,5 +88,35 @@ func (i interactor) Login(ctx *gin.Context) {
 		return
 	}
 
-	ctx.JSON(http.StatusOK, gin.H{"message": "Login successful"})
+	ctx.SetCookie("loginToken", token, 3600*24, "/", "http://localhost:3000/", false, true)
+
+	ctx.JSON(http.StatusOK, gin.H{"message": "Login exitoso"})
+}
+
+func AuthMiddleware(jwtSecretKey string) gin.HandlerFunc {
+	return func(ctx *gin.Context) {
+		tokenString, err := ctx.Cookie("token")
+		if err != nil {
+			ctx.AbortWithStatusJSON(http.StatusUnauthorized, gin.H{"message": "No se encontró token"})
+			return
+		}
+
+		claims := &services.Claims{}
+		token, err := jwt.ParseWithClaims(tokenString, claims, func(token *jwt.Token) (interface{}, error) {
+			return []byte(jwtSecretKey), nil
+		})
+
+		if err != nil || !token.Valid {
+			ctx.AbortWithStatusJSON(http.StatusUnauthorized, gin.H{"message": "Token inválido"})
+			return
+		}
+
+		if claims.ExpiresAt < jwt.TimeFunc().Unix() {
+			ctx.AbortWithStatusJSON(http.StatusUnauthorized, gin.H{"message": "Token expirado"})
+			return
+		}
+
+		ctx.Set("email", claims.Email)
+		ctx.Next()
+	}
 }

@@ -1,57 +1,70 @@
 package services
 
 import (
-	"github.com/samber/lo"
-	"pfg-daw-grupo-12-backend/internal/errors"
-	"pfg-daw-grupo-12-backend/internal/models"
-	"slices"
+	"github.com/dgrijalva/jwt-go"
+	"github.com/pkg/errors"
+	"pfg-daw-grupo-12-backend/internal/database"
+	internal_errors "pfg-daw-grupo-12-backend/internal/errors"
+	"time"
 )
 
-var users = []models.User{
-	{
-		Email:    "example@gmail.com",
-		Password: "Random123.",
-	},
-}
-
 type auth struct {
+	DB           database.Database // Assuming you have a database struct
+	JWTSecretKey string
 }
 
-func NewAuth() auth {
-	return auth{}
+type Claims struct {
+	Email string `json:"email"`
+	jwt.StandardClaims
 }
 
-func (a auth) Register(email, password string) error {
-	usernameAlreadyRegistered := slices.ContainsFunc(users, func(user models.User) bool {
-		return user.Email == email
-	})
+func NewAuth(DB database.Database, jwtSecretKey string) *auth {
+	return &auth{DB: DB, JWTSecretKey: jwtSecretKey}
+}
 
-	if usernameAlreadyRegistered {
-		return errors.ExistentUserErr
+func (a *auth) Register(email, contrasenia string) error {
+	usuario, err := a.DB.GetUsuarioByEmail(email)
+	if err != nil {
+		return errors.Wrap(err, "no se pudo obtener usuario por email")
 	}
 
-	newUser := models.User{
-		Email:    email,
-		Password: password,
+	usuarioYaRegistrado := usuario != nil
+
+	if usuarioYaRegistrado {
+		return internal_errors.UsuarioExistenteErr
 	}
 
-	users = append(users, newUser)
+	err = a.DB.CreateUsuario(email, contrasenia)
+	if err != nil {
+		return errors.Wrap(err, "no se pudo crear usuario")
+	}
 
 	return nil
 }
 
-func (a auth) Login(email, password string) error {
-	user, found := lo.Find(users, func(user models.User) bool {
-		return user.Email == email
-	})
-
-	if !found {
-		return errors.LoginFailedErr
+func (a *auth) Login(email, contrasenia string) (string, error) {
+	usuario, err := a.DB.GetUsuarioByEmail(email)
+	if err != nil {
+		return "", errors.Wrap(err, "no se pudo obtener usuario por email")
 	}
 
-	if user.Password != password {
-		return errors.LoginFailedErr
+	if usuario == nil || usuario.Contrasenia != contrasenia {
+		return "", internal_errors.FalloLoginErr
 	}
 
-	return nil
+	expirationTime := time.Now().Add(24 * time.Hour)
+	claims := &Claims{
+		Email: email,
+		StandardClaims: jwt.StandardClaims{
+			ExpiresAt: expirationTime.Unix(),
+		},
+	}
+
+	token := jwt.NewWithClaims(jwt.SigningMethodHS256, claims)
+	tokenString, err := token.SignedString([]byte(a.JWTSecretKey))
+	if err != nil {
+		return "", errors.Wrap(err, "no se pudo firmar el token")
+	}
+
+	return tokenString, nil
 }

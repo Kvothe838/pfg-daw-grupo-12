@@ -1,7 +1,10 @@
 package models
 
 type PlanEjercicio struct {
-	Name        string `json:"name"`
-	Description string `json:"description"`
-	Plan        string `json:"plan"`
+	ID          int64   `json:"id"`
+	Nombre      string  `json:"nombre"`
+	Descripcion string  `json:"descripcion"`
+	Plan        string  `json:"plan"`
+	CreadoPor   Usuario `json:"creado_por"`
+	EditadoPor  Usuario `json:"editado_por"`
 }

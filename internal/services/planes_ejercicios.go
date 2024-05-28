@@ -1,21 +1,18 @@
 package services
 
-import "pfg-daw-grupo-12-backend/internal/models"
+import (
+	"pfg-daw-grupo-12-backend/internal/database"
+	"pfg-daw-grupo-12-backend/internal/models"
+)
 
-type planesEjercicios struct{}
-
-func NewPlanesEjercicios() planesEjercicios {
-	return planesEjercicios{}
+type planesEjercicios struct {
+	DB database.Database
 }
 
-var planesEjerciciosMock = []models.PlanEjercicio{
-	{
-		Name:        "Guerrero principiante",
-		Description: "¿Eres nuevo en el ejercicio? ¡No te preocupes! Nuestro plan ha sido creado pensando en ti.",
-		Plan:        "Día 1: Entrenamiento de Fuerza y Potencia (...)",
-	},
+func NewPlanesEjercicios(db database.Database) *planesEjercicios {
+	return &planesEjercicios{}
 }
 
-func (p planesEjercicios) GetAll() ([]models.PlanEjercicio, error) {
-	return planesEjerciciosMock, nil
+func (p *planesEjercicios) GetAll() ([]models.PlanEjercicio, error) {
+	return p.DB.GetAllPlanesEjercicios()
 }

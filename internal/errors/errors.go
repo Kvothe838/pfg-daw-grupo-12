@@ -2,5 +2,8 @@ package errors
 
 import "errors"
 
-var ExistentUserErr = errors.New("usuario ya existente")
-var LoginFailedErr = errors.New("fallo al intentar hacer login")
+var (
+	UsuarioExistenteErr = errors.New("usuario ya existente")
+	FalloLoginErr       = errors.New("fallo al intentar hacer login")
+	SesionExpiradaErr   = errors.New("sesión expirada")
+)
