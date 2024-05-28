@@ -27,11 +27,11 @@ const RegisterForm = ({ onRegister }) => {
       return;
     }
     if (!validateEmail(email)) {
-      setError('Invalid email format.');
+      setError('Formato de email inválido.');
       return;
     }
     if (!validatePassword(password)) {
-      setError('Password must be at least 7 characters long, contain one uppercase letter, and one number.');
+      setError('La contraseña debe tener al menos 7 caracteres de longitud, contener una letra mayúscula y un número.');
       return;
     }
     if (password !== confirmPassword) {

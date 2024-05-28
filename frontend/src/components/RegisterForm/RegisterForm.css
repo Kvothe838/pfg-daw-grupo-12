@@ -10,66 +10,73 @@ body {
     display: flex;
     justify-content: center;
     align-items: center;
-  }
-  
-  /* Apply blur to the entire background */
-  .background {
+    overflow: hidden;
+}
+
+/* Apply blur to the entire background */
+.background {
     position: absolute;
     top: 0;
     left: 0;
     width: 100%;
     height: 100%;
-    filter: blur(5px);
-    background: rgba(255, 255, 255, 0.199);
-    z-index: 1; /* Set z-index to make sure it's behind the form */
-  }
-  
-  .register-container {
+    z-index: 1; /* Ensure it's behind the form */
+}
+
+.register-container {
     position: relative;
-    z-index: 2; /* Set z-index to make sure it's above the blurred background */
+    z-index: 2; /* Ensure it's above the blurred background */
     width: 100%;
     display: flex;
     justify-content: center;
     align-items: center;
     height: 100vh;
-  }
-  
-  .register-form {
-    background: rgba(255, 255, 255, 0.8); /* Set background color with opacity for transparency */
+}
+
+.register-form {
+    background: rgba(74, 67, 67, 0.489); /* Set background color with opacity for transparency */
     padding: 40px;
     border-radius: 10px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
     max-width: 400px;
     width: 100%;
     text-align: center;
-  }
-  
-  h2 {
+    z-index: 3; /* Ensure it's above all other elements */
+}
+
+h2 {
     font-size: 2rem;
     margin-bottom: 20px;
-  }
-  
-  .error {
-    color: red;
+    color: whitesmoke;
+}
+
+.error {
+    color: rgb(215, 81, 90);
     margin-bottom: 10px;
-  }
-  
-  label {
+    font-size: 1.5rem;
+}
+
+label {
+    color: whitesmoke;
+    font-size: 1.5rem;
     display: block;
     margin: 10px 0 5px;
     text-align: left;
-  }
-  
-  input {
+}
+
+input {
     width: 100%;
     padding: 10px;
     margin-bottom: 20px;
-    border-radius: 5px;
-    border: 1px solid #ccc;
+    border-radius: 20px;
+    border: 1px solid ;
     box-sizing: border-box;
-  }
-  
-  button {
+    background-color:white; /* Set background to be opaque */
+    color: #333; /* Set text color to be dark */
+    position: relative; /* Ensure inputs are above the blurred background */
+    z-index: 4; /* Ensure input fields are interactable */
+}
+
+button {
     background: linear-gradient(45deg, #6a11cb, #2575fc);
     color: white;
     border: none;
@@ -79,16 +86,16 @@ body {
     font-size: 1rem;
     transition: all 0.3s ease;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-  }
-  
-  button:hover {
+    z-index: 4; /* Ensure button is interactable */
+}
+
+button:hover {
     background: linear-gradient(45deg, #2575fc, #6a11cb);
     box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2);
     transform: translateY(-2px);
-  }
-  
-  button:active {
+}
+
+button:active {
     transform: translateY(0);
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-  }
-  
+}

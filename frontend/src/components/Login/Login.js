@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import '../RegisterForm/RegisterForm.css';
 
 const LoginForm = ({ onLogin }) => {
   const [email, setEmail] = useState('');
@@ -10,7 +11,9 @@ const LoginForm = ({ onLogin }) => {
   };
 
   const validatePassword = (password) => {
-    return /(?=.*[0-9])(?=.*[A-Z]).{7,}/.test(password);
+    const hasUpperCase = /[A-Z]/.test(password);
+    const hasNumber = /[0-9]/.test(password);
+    return password.length >= 7 && hasUpperCase && hasNumber;
   };
 
   const handleSubmit = (e) => {
@@ -25,7 +28,8 @@ const LoginForm = ({ onLogin }) => {
     }
 
     setError('');
-    const url = 'http://localhost:8080/login';
+    // const url = 'http://localhost:8080/login';
+    const url= 'https://jsonplaceholder.typicode.com/posts';
     const requestOptions = {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
@@ -54,8 +58,8 @@ const LoginForm = ({ onLogin }) => {
   };
 
   return (
-    <div className="login-form">
-      <h2>Login</h2>
+    <div className="register-form">
+      <h2>Welcome Back !!</h2>
       {error && <div className="error">{error}</div>}
       <form onSubmit={handleSubmit}>
         <label>Email:</label>
