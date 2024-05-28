@@ -3,9 +3,9 @@ package main
 import (
 	"github.com/gin-contrib/cors"
 	"github.com/gin-gonic/gin"
-	api "pfg-daw-grupo-12-backend/api/handlers"
-	"pfg-daw-grupo-12-backend/internal/database/mysql"
-	"pfg-daw-grupo-12-backend/internal/services"
+	"pfg-daw-grupo-12-backend/backend/api/handlers"
+	"pfg-daw-grupo-12-backend/backend/internal/database/mysql"
+	services2 "pfg-daw-grupo-12-backend/backend/internal/services"
 )
 
 func main() {
@@ -26,8 +26,8 @@ func main() {
 	defer dbConnection.Driver.Close()
 
 	jwtSecretKey := "secret"
-	authService := services.NewAuth(dbConnection, jwtSecretKey)
-	planesEjerciciosService := services.NewPlanesEjercicios(dbConnection)
+	authService := services2.NewAuth(dbConnection, jwtSecretKey)
+	planesEjerciciosService := services2.NewPlanesEjercicios(dbConnection)
 	interactor := api.NewInteractor(authService, planesEjerciciosService)
 	router.POST("/login", interactor.Login)
 	router.POST("/register", interactor.Register)

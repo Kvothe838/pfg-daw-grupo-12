@@ -3,8 +3,8 @@ package services
 import (
 	"github.com/dgrijalva/jwt-go"
 	"github.com/pkg/errors"
-	"pfg-daw-grupo-12-backend/internal/database"
-	internal_errors "pfg-daw-grupo-12-backend/internal/errors"
+	"pfg-daw-grupo-12-backend/backend/internal/database"
+	internal_errors "pfg-daw-grupo-12-backend/backend/internal/errors"
 	"time"
 )
 

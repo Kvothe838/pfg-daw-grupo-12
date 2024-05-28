@@ -3,10 +3,9 @@ package mysql
 import (
 	"database/sql"
 	"fmt"
-	"github.com/pkg/errors"
-	"pfg-daw-grupo-12-backend/internal/models"
-
 	_ "github.com/go-sql-driver/mysql"
+	"github.com/pkg/errors"
+	models2 "pfg-daw-grupo-12-backend/backend/internal/models"
 )
 
 type conn struct {
@@ -31,7 +30,7 @@ func NewConn(user, password, dbName string) (*conn, error) {
 	return &conn{Driver: db}, nil
 }
 
-func (c *conn) GetAllPlanesEjercicios() ([]models.PlanEjercicio, error) {
+func (c *conn) GetAllPlanesEjercicios() ([]models2.PlanEjercicio, error) {
 	rows, err := c.Driver.Query(`
 		SELECT *
 		FROM plan_ejercicios
@@ -42,9 +41,9 @@ func (c *conn) GetAllPlanesEjercicios() ([]models.PlanEjercicio, error) {
 
 	defer rows.Close()
 
-	planes := make([]models.PlanEjercicio, 0)
+	planes := make([]models2.PlanEjercicio, 0)
 	for rows.Next() {
-		var plan models.PlanEjercicio
+		var plan models2.PlanEjercicio
 		var (
 			creadoPorID  int64
 			editadoPorID int64
@@ -85,13 +84,13 @@ func (c *conn) GetAllPlanesEjercicios() ([]models.PlanEjercicio, error) {
 	return planes, nil
 }
 
-func (c *conn) getUsuarioByID(ID int64) (*models.Usuario, error) {
+func (c *conn) getUsuarioByID(ID int64) (*models2.Usuario, error) {
 	row := c.Driver.QueryRow(`
 		SELECT *
 		FROM usuarios
 		WHERE id = ?`, ID)
 	var (
-		usuario models.Usuario
+		usuario models2.Usuario
 		rolID   int64
 	)
 
@@ -107,14 +106,14 @@ func (c *conn) getUsuarioByID(ID int64) (*models.Usuario, error) {
 	return &usuario, nil
 }
 
-func (c *conn) GetUsuarioByEmail(email string) (*models.Usuario, error) {
+func (c *conn) GetUsuarioByEmail(email string) (*models2.Usuario, error) {
 	fmt.Println("email: ", email)
 	row := c.Driver.QueryRow(`
 		SELECT *
 		FROM usuarios
 		WHERE email = ?`, email)
 	var (
-		usuario models.Usuario
+		usuario models2.Usuario
 		rolID   int64
 	)
 

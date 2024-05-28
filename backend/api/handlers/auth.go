@@ -5,9 +5,9 @@ import (
 	"github.com/dgrijalva/jwt-go"
 	"github.com/gin-gonic/gin"
 	"net/http"
-	"pfg-daw-grupo-12-backend/internal/errors"
-	"pfg-daw-grupo-12-backend/internal/models"
-	"pfg-daw-grupo-12-backend/internal/services"
+	"pfg-daw-grupo-12-backend/backend/internal/errors"
+	"pfg-daw-grupo-12-backend/backend/internal/models"
+	"pfg-daw-grupo-12-backend/backend/internal/services"
 )
 
 type authService interface {

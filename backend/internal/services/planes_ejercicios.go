@@ -1,8 +1,8 @@
 package services
 
 import (
-	"pfg-daw-grupo-12-backend/internal/database"
-	"pfg-daw-grupo-12-backend/internal/models"
+	"pfg-daw-grupo-12-backend/backend/internal/database"
+	"pfg-daw-grupo-12-backend/backend/internal/models"
 )
 
 type planesEjercicios struct {
