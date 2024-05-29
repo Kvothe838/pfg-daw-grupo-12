@@ -154,6 +154,19 @@ func (c *conn) GetPlanEjercicio(planID int64) (*models.PlanEjercicio, error) {
 	return &plan, nil
 }
 
+func (c *conn) DeletePlanEjercicio(planID, editadoPorID int64) error {
+	_, err := c.Driver.Exec(`
+		UPDATE planes_ejercicios
+		SET borrado = true, editado_por_id = ?
+		WHERE id=?`, editadoPorID, planID)
+
+	if err != nil {
+		return errors.Wrap(err, "no se pudo ejecutar query para borrar plan de ejercicio")
+	}
+
+	return nil
+}
+
 func (c *conn) getUsuarioByID(ID int64) (*models.Usuario, error) {
 	row := c.Driver.QueryRow(`
 		SELECT *

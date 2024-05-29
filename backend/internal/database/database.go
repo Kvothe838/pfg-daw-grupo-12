@@ -9,6 +9,7 @@ type Database interface {
 	GetPlanesEjercicios() ([]models.PlanEjercicio, error)
 	GetPlanEjercicio(planID int64) (*models.PlanEjercicio, error)
 	UpdatePlanEjercicio(models.PlanEjercicio) error
+	DeletePlanEjercicio(planID, editadoPorID int64) error
 	GetUsuarioByEmail(email string) (*models.Usuario, error)
 	CreateUsuario(email, contrasenia string) error
 }

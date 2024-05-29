@@ -37,6 +37,7 @@ func main() {
 	admin.Use(api.AuthMiddleware(jwtSecretKey))
 	admin.POST("/planes-ejercicios", interactor.CreatePlanEjercicios)
 	admin.PUT("/planes-ejercicios", interactor.UpdatePlanEjercicios)
+	admin.DELETE("/planes-ejercicios", interactor.DeletePlanEjercicios)
 
 	router.Run("localhost:8080")
 }
