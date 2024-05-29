@@ -1,5 +1,6 @@
-import React, { useState } from 'react';
-import '../RegisterForm/RegisterForm.css';
+import React, { useState  } from 'react';
+import './Login.css';
+import { Link } from 'react-router-dom';
 
 const LoginForm = ({ onLogin }) => {
   const [email, setEmail] = useState('');
@@ -19,17 +20,16 @@ const LoginForm = ({ onLogin }) => {
   const handleSubmit = (e) => {
     e.preventDefault();
     if (!validateEmail(email)) {
-      setError('Formato de email inválido.');
+      setError('Invalid email format.');
       return;
     }
     if (!validatePassword(password)) {
-      setError('La contraseña debe tener al menos 7 caracteres de longitud, contener una letra mayúscula y un número.');
+      setError('Password must be at least 7 characters long, contain an uppercase letter and a number.');
       return;
     }
 
     setError('');
-    // const url = 'http://localhost:8080/login';
-    const url= 'https://jsonplaceholder.typicode.com/posts';
+    const url = 'https://jsonplaceholder.typicode.com/posts';
     const requestOptions = {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
@@ -37,28 +37,30 @@ const LoginForm = ({ onLogin }) => {
     };
 
     fetch(url, requestOptions)
-        .then(response => {
-          if (!response.ok) {
-            if (response.status === 401) {
-              throw new Error('Email o contraseña incorrectos');
-            } else {
-              throw new Error('Login failed');
-            }
+      .then(response => {
+        if (!response.ok) {
+          if (response.status === 401) {
+            throw new Error('Incorrect email or password.');
+          } else {
+            throw new Error('Login failed.');
           }
-          return response.json();
-        })
-        .then(data => {
-          console.log('Login successful', data);
-          onLogin(email, password);
-        })
-        .catch(error => {
-          setError(error.message);
-          console.log('Form submit error', error);
-        });
+        }
+        return response.json();
+      })
+      .then(data => {
+        console.log('Login successful', data);
+        onLogin(email, password);
+      })
+      .catch(error => {
+        setError(error.message);
+        console.log('Form submit error', error);
+      });
   };
 
   return (
-    <div className="register-form">
+    <>
+    <div className="background-login"></div>
+    <div className="login-form">
       <h2>Welcome Back !!</h2>
       {error && <div className="error">{error}</div>}
       <form onSubmit={handleSubmit}>
@@ -77,8 +79,10 @@ const LoginForm = ({ onLogin }) => {
           required
         />
         <button type="submit">Login</button>
+        <p>Haven't Register Yourself? <Link to={'/register'}> Register Here! </Link> </p>
       </form>
     </div>
+    </>
   );
 };
 

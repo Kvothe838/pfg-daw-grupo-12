@@ -1,5 +1,7 @@
 import React, { useState } from 'react';
 import './Navbar.css';
+import logo from '../../assets/LOGO-FYNC.jpg';
+import { Link } from 'react-router-dom';
 
 const Navbar = ({ email, onLogout }) => {
   const [showLogout, setShowLogout] = useState(false);
@@ -9,27 +11,30 @@ const Navbar = ({ email, onLogout }) => {
   };
 
   return (
-    <nav className="navbar">
-      <div className="logo">MyApp</div>
+    <div className="nav">
+      <img src={logo} alt="Logo" className="logos" />
       <div className="links">
-        <a href="/">Home</a>
-        <a href="/about">About Us</a>
-        <a href="/contact">Contact Us</a>
+        <Link to="/">Home</Link>
+        <Link to="/about">About Us</Link>
+        <Link to="/contact">Contact Us</Link>
         <div className="dropdown">
-          <button className="dropbtn">Exercises</button>
+          <Link  className="dropbtn">Services</Link>
           <div className="dropdown-content">
-            <a href="/guide-plan">Guide Plan</a>
-            <a href="/nutritional-guide">Nutritional Guide</a>
+            <Link to="/exercises">Exercises</Link>
+            <Link to="/guide-plan">Guide Plan</Link>
+            <Link to="/nutritional-guide">Nutritional Guide</Link>
           </div>
         </div>
-        {email && (
+        {email ? (
           <div className="profile" onClick={handleProfileClick}>
             {email.charAt(0).toUpperCase()}
             {showLogout && <div className="logout" onClick={onLogout}>Logout</div>}
           </div>
+        ) : (
+          <Link to="/login">Login</Link>
         )}
       </div>
-    </nav>
+    </div>
   );
 };
 

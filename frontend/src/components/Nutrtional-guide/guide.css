@@ -1,0 +1,94 @@
+/* guide.css */
+body {
+    font-family: 'Arial', sans-serif;
+    background-color: #f9f9f9;
+    margin: 0;
+    padding: 0;
+    overflow-x: hidden; /* Ensure horizontal overflow doesn't show */
+}
+
+.guide {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 20px;
+    position: relative;
+    overflow-x: auto; /* Make the guide section scrollable */
+    max-height: calc(100vh - 40px); /* Adjust the max-height as needed */
+}
+
+.header {
+    background-color: #ff6f61;
+    color: white;
+    padding: 20px;
+    text-align: center;
+    border-radius: 8px;
+    margin-bottom: 20px;
+}
+
+.header h1 {
+    margin: 0;
+    font-size: 2.5em;
+}
+
+.main-content {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.intro {
+    background-color: #fff;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    padding: 20px;
+    margin-bottom: 20px;
+}
+
+.intro p {
+    margin: 0;
+    margin-bottom: 10px;
+}
+
+.content {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+     /* Ensure even spacing between boxes */
+}
+
+.content-block {
+    background-color: #e3f2fd;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    padding: 20px;
+    width: calc(33% - 20px); /* Adjust width to fit three boxes in a row */
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.content-block h2 {
+    font-size: 1.5em;
+    color: #df862d;
+    margin-bottom: 10px;
+    text-align: center;
+}
+
+.content-block img {
+    width: 100px;
+    height: 80px;
+    border-radius: 8px;
+    margin-bottom: 10px;
+}
+
+.content-block p {
+    text-align: center;
+}
+
+.content-block:nth-child(odd) {
+    background-color: #ffebee;
+}
+
+.content-block:nth-child(even) {
+    background-color: #e8f5e9;
+}

@@ -1,0 +1,109 @@
+/* Navbar.css */
+
+.nav {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1rem;
+  padding-left: 90px; /* Add padding to the left side */
+  background-color: #d33e63f8;
+  color: white;
+  position: fixed;
+  top: 0;
+  right: 0;
+  width: 100%; /* Ensure the navbar spans the full width */
+  z-index: 10;
+}
+
+.nav .logos {
+  width: 100px;
+  height: auto;
+  padding-left: 50px;
+}
+
+.nav .links {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  margin-left: auto; /* Push the links to the right */
+}
+
+.nav .links button,
+.nav .links a {
+  background-color: #6b0b22b3; /* Change button background color */
+  color: white;
+  border: solid;
+  cursor: pointer;
+  font-size: 1.1rem;
+  padding: 0.5rem 1rem;
+  transition: background-color 0.3s ease;
+  text-decoration: none;
+  border-radius: 5px;
+}
+
+.nav .links button:hover,
+.nav .links a:hover {
+  background-color: #380c16b3; /* Change button hover color */
+}
+
+.nav .dropdown {
+  position: relative;
+  display: inline-block;
+}
+
+.nav .dropdown-content {
+  display: none;
+  position: absolute;
+  background-color: #106051;
+  min-width: 200px;
+  box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
+  z-index: 1;
+  right: 0;
+}
+
+.nav .dropdown-content a {
+  color: whitesmoke;
+  padding: 12px 16px;
+  text-decoration: none;
+  display: block;
+}
+
+.nav .dropdown-content a:hover {
+  background-color: #575757;
+}
+
+.nav .dropdown:hover .dropdown-content {
+  display: block;
+}
+
+
+.nav .profile {
+  cursor: pointer;
+  border-radius: 50%;
+  background-color: white;
+  color: #4a4a8a;
+  padding: 10px;
+  display: inline-flex;
+  justify-content: center;
+  align-items: center;
+  width: 40px;
+  height: 40px;
+  position: relative;
+}
+
+.nav .logout {
+  display: none;
+  position: absolute;
+  right: 0;
+  top: calc(100%); /* Adjust for space between profile and logout */
+  background-color: white;
+  color: #4a4a8a;
+  padding: 10px 15px;
+  border-radius: 4px;
+  cursor: pointer;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.nav .profile:hover .logout {
+  display: block;
+}

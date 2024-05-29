@@ -1,28 +1,22 @@
-/* Apply background image and make it cover the entire screen */
-body {
-    font-family: Arial, sans-serif;
-    background-image: url('../../assets/register-bck.jpeg');
-    background-size: cover;
-    background-position: center;
-    margin: 0;
-    padding: 0;
-    height: 100vh;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    overflow: hidden;
-}
+/* RegisterForm.css */
 
-/* Apply blur to the entire background */
+
 .background {
-    position: absolute;
+    position: fixed;
     top: 0;
     left: 0;
     width: 100%;
     height: 100%;
-    z-index: 1; /* Ensure it's behind the form */
+    background-image: url('../../assets/register-bck.jpeg');
+    background-size: cover;
+    background-position: center;
+    z-index: -1;
+    filter: blur(3px);
 }
 
+p {
+    color: white;
+}
 .register-container {
     position: relative;
     z-index: 2; /* Ensure it's above the blurred background */
@@ -34,7 +28,7 @@ body {
 }
 
 .register-form {
-    background: rgba(74, 67, 67, 0.489); /* Set background color with opacity for transparency */
+    background: rgba(198, 181, 181, 0.271); /* Set background color with opacity for transparency */
     padding: 40px;
     border-radius: 10px;
     max-width: 400px;
@@ -70,10 +64,10 @@ input {
     border-radius: 20px;
     border: 1px solid ;
     box-sizing: border-box;
-    background-color:white; /* Set background to be opaque */
+    background-color: white; /* Set background to be opaque */
     color: #333; /* Set text color to be dark */
-    position: relative; /* Ensure inputs are above the blurred background */
-    z-index: 4; /* Ensure input fields are interactable */
+    position: relative; /* Ensure inputs are above the background */
+    z-index: 4; /* Ensure inputs are above the background */
 }
 
 button {
@@ -85,17 +79,13 @@ button {
     cursor: pointer;
     font-size: 1rem;
     transition: all 0.3s ease;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-    z-index: 4; /* Ensure button is interactable */
 }
 
 button:hover {
     background: linear-gradient(45deg, #2575fc, #6a11cb);
-    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2);
     transform: translateY(-2px);
 }
 
 button:active {
     transform: translateY(0);
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 }

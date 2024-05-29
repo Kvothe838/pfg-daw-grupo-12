@@ -2,6 +2,7 @@
 
 import React, { useState } from 'react';
 import './RegisterForm.css';
+import { Link } from 'react-router-dom';
 
 const RegisterForm = ({ onRegister }) => {
   const [username, setUsername] = useState('');
@@ -88,6 +89,7 @@ const RegisterForm = ({ onRegister }) => {
             onChange={(e) => setConfirmPassword(e.target.value)}
           />
           <button type="submit">Register</button>
+          <p>Already have an account?<Link to="/login"> Log in! </Link> </p>
         </form>
       </div>
     </div>
