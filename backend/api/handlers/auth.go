@@ -6,17 +6,12 @@ import (
 	"github.com/gin-gonic/gin"
 	"net/http"
 	"pfg-daw-grupo-12-backend/backend/internal/errors"
-	"pfg-daw-grupo-12-backend/backend/internal/models"
 	"pfg-daw-grupo-12-backend/backend/internal/services"
 )
 
 type authService interface {
 	Login(email, contrasenia string) (string, error)
 	Register(email, contrasenia string) error
-}
-
-type planesEjerciciosService interface {
-	GetAll() ([]models.PlanEjercicio, error)
 }
 
 func NewInteractor(auth authService, planesEjercicios planesEjerciciosService) *interactor {
@@ -95,7 +90,7 @@ func (i *interactor) Login(ctx *gin.Context) {
 
 func AuthMiddleware(jwtSecretKey string) gin.HandlerFunc {
 	return func(ctx *gin.Context) {
-		tokenString, err := ctx.Cookie("token")
+		tokenString, err := ctx.Cookie("loginToken")
 		if err != nil {
 			ctx.AbortWithStatusJSON(http.StatusUnauthorized, gin.H{"message": "No se encontró token"})
 			return
@@ -116,7 +111,7 @@ func AuthMiddleware(jwtSecretKey string) gin.HandlerFunc {
 			return
 		}
 
-		ctx.Set("email", claims.Email)
+		ctx.Set("usuarioID", claims.UsuarioID)
 		ctx.Next()
 	}
 }

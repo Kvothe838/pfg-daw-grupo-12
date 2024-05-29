@@ -1,11 +1,14 @@
 package database
 
 import (
-	models2 "pfg-daw-grupo-12-backend/backend/internal/models"
+	"pfg-daw-grupo-12-backend/backend/internal/models"
 )
 
 type Database interface {
-	GetAllPlanesEjercicios() ([]models2.PlanEjercicio, error)
-	GetUsuarioByEmail(email string) (*models2.Usuario, error)
+	CreatePlanEjercicio(models.PlanEjercicio) error
+	GetPlanesEjercicios() ([]models.PlanEjercicio, error)
+	GetPlanEjercicio(planID int64) (*models.PlanEjercicio, error)
+	UpdatePlanEjercicio(models.PlanEjercicio) error
+	GetUsuarioByEmail(email string) (*models.Usuario, error)
 	CreateUsuario(email, contrasenia string) error
 }

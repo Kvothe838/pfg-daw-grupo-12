@@ -14,7 +14,7 @@ type auth struct {
 }
 
 type Claims struct {
-	Email string `json:"email"`
+	UsuarioID int64 `json:"usuario_id"`
 	jwt.StandardClaims
 }
 
@@ -54,7 +54,7 @@ func (a *auth) Login(email, contrasenia string) (string, error) {
 
 	expirationTime := time.Now().Add(24 * time.Hour)
 	claims := &Claims{
-		Email: email,
+		UsuarioID: usuario.ID,
 		StandardClaims: jwt.StandardClaims{
 			ExpiresAt: expirationTime.Unix(),
 		},

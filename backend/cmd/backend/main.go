@@ -35,6 +35,8 @@ func main() {
 
 	admin := router.Group("/admin")
 	admin.Use(api.AuthMiddleware(jwtSecretKey))
+	admin.POST("/planes-ejercicios", interactor.CreatePlanEjercicios)
+	admin.PUT("/planes-ejercicios", interactor.UpdatePlanEjercicios)
 
 	router.Run("localhost:8080")
 }

@@ -5,7 +5,7 @@ import (
 	"fmt"
 	_ "github.com/go-sql-driver/mysql"
 	"github.com/pkg/errors"
-	models2 "pfg-daw-grupo-12-backend/backend/internal/models"
+	"pfg-daw-grupo-12-backend/backend/internal/models"
 )
 
 type conn struct {
@@ -30,10 +30,10 @@ func NewConn(user, password, dbName string) (*conn, error) {
 	return &conn{Driver: db}, nil
 }
 
-func (c *conn) GetAllPlanesEjercicios() ([]models2.PlanEjercicio, error) {
+func (c *conn) GetPlanesEjercicios() ([]models.PlanEjercicio, error) {
 	rows, err := c.Driver.Query(`
-		SELECT *
-		FROM plan_ejercicios
+		SELECT id, nombre, descripcion, ejercicios, creado_por_id, editado_por_id
+		FROM planes_ejercicios
 		WHERE borrado = 0`)
 	if err != nil {
 		return nil, errors.Wrap(err, "no se pudo ejecutar query")
@@ -41,16 +41,16 @@ func (c *conn) GetAllPlanesEjercicios() ([]models2.PlanEjercicio, error) {
 
 	defer rows.Close()
 
-	planes := make([]models2.PlanEjercicio, 0)
+	planes := make([]models.PlanEjercicio, 0)
 	for rows.Next() {
-		var plan models2.PlanEjercicio
+		var plan models.PlanEjercicio
 		var (
 			creadoPorID  int64
 			editadoPorID int64
 		)
 
-		if err := rows.Scan(&plan.ID, &plan.Nombre, &plan.Descripcion, &plan.Plan, &creadoPorID, &editadoPorID); err != nil {
-			return nil, errors.Wrap(err, "no se pudo escanear el resultado de la consulta")
+		if err := rows.Scan(&plan.ID, &plan.Nombre, &plan.Descripcion, &plan.Ejercicios, &creadoPorID, &editadoPorID); err != nil {
+			return nil, errors.Wrap(err, "no se pudo escanear el resultado de la consulta GetPlanesEjercicios")
 		}
 
 		creadoPor, err := c.getUsuarioByID(creadoPorID)
@@ -84,36 +84,83 @@ func (c *conn) GetAllPlanesEjercicios() ([]models2.PlanEjercicio, error) {
 	return planes, nil
 }
 
-func (c *conn) getUsuarioByID(ID int64) (*models2.Usuario, error) {
+func (c *conn) CreatePlanEjercicio(plan models.PlanEjercicio) error {
+	_, err := c.Driver.Exec(`
+		INSERT INTO planes_ejercicios(nombre, descripcion, ejercicios, creado_por_id, editado_por_id)
+		VALUES(?, ?, ?, ?, ?)
+	`, plan.Nombre, plan.Descripcion, plan.Ejercicios, plan.CreadoPor.ID, plan.EditadoPor.ID)
+
+	if err != nil {
+		return errors.Wrap(err, "no se pudo ejecutar query para CREAR plan de ejercicio")
+	}
+
+	return nil
+}
+
+func (c *conn) UpdatePlanEjercicio(plan models.PlanEjercicio) error {
+	_, err := c.Driver.Exec(`
+		UPDATE planes_ejercicios
+		SET nombre=?, descripcion=?, ejercicios=?, editado_por_id=?
+		WHERE id=?
+	`, plan.Nombre, plan.Descripcion, plan.Ejercicios, plan.EditadoPor.ID, plan.ID)
+
+	if err != nil {
+		return errors.Wrap(err, "no se pudo ejecutar query para actualizar plan de ejercicio")
+	}
+
+	return nil
+}
+
+func (c *conn) GetPlanEjercicio(planID int64) (*models.PlanEjercicio, error) {
 	row := c.Driver.QueryRow(`
-		SELECT *
-		FROM usuarios
-		WHERE id = ?`, ID)
+		SELECT id, nombre, descripcion, ejercicios, creado_por_id, editado_por_id
+		FROM planes_ejercicios
+		WHERE id = ? AND borrado = 0`, planID)
 	var (
-		usuario models2.Usuario
-		rolID   int64
+		plan                      models.PlanEjercicio
+		creadoPorID, editadoPorID int64
 	)
 
-	err := row.Scan(&usuario.ID, &usuario.Email, &usuario.Email, &rolID, &usuario.FechaCreacion)
+	err := row.Scan(&plan.ID, &plan.Nombre, &plan.Descripcion, &plan.Ejercicios, &creadoPorID, &editadoPorID)
 	if err != nil {
 		if err == sql.ErrNoRows {
 			return nil, nil
 		}
 
-		return nil, errors.Wrap(err, "no se pudo escanear el resultado de la consulta")
+		return nil, errors.Wrap(err, "error al escanear el resultado de la consulta GetPlanEjercicio")
 	}
 
-	return &usuario, nil
+	creadoPor, err := c.getUsuarioByID(creadoPorID)
+	if err != nil {
+		return nil, errors.Wrap(err, "no se pudo obtener usuario que creó el plan")
+	}
+
+	if creadoPor == nil {
+		return nil, errors.Wrapf(err, "no existe usuario creador de plan para id %d", creadoPorID)
+	}
+
+	editadoPor, err := c.getUsuarioByID(editadoPorID)
+	if err != nil {
+		return nil, errors.Wrap(err, "no se pudo obtener usuario que editó el plan")
+	}
+
+	if editadoPor == nil {
+		return nil, errors.Wrapf(err, "no existe usuario editor de plan para id %d", editadoPorID)
+	}
+
+	plan.CreadoPor = *creadoPor
+	plan.EditadoPor = *editadoPor
+
+	return &plan, nil
 }
 
-func (c *conn) GetUsuarioByEmail(email string) (*models2.Usuario, error) {
-	fmt.Println("email: ", email)
+func (c *conn) getUsuarioByID(ID int64) (*models.Usuario, error) {
 	row := c.Driver.QueryRow(`
 		SELECT *
 		FROM usuarios
-		WHERE email = ?`, email)
+		WHERE id = ?`, ID)
 	var (
-		usuario models2.Usuario
+		usuario models.Usuario
 		rolID   int64
 	)
 
@@ -123,7 +170,29 @@ func (c *conn) GetUsuarioByEmail(email string) (*models2.Usuario, error) {
 			return nil, nil
 		}
 
-		return nil, errors.Wrap(err, "error al escanear el resultado de la consulta")
+		return nil, errors.Wrap(err, "no se pudo escanear el resultado de la consulta getUsuarioByID")
+	}
+
+	return &usuario, nil
+}
+
+func (c *conn) GetUsuarioByEmail(email string) (*models.Usuario, error) {
+	row := c.Driver.QueryRow(`
+		SELECT *
+		FROM usuarios
+		WHERE email = ?`, email)
+	var (
+		usuario models.Usuario
+		rolID   int64
+	)
+
+	err := row.Scan(&usuario.ID, &usuario.Email, &usuario.Contrasenia, &rolID, &usuario.FechaCreacion)
+	if err != nil {
+		if err == sql.ErrNoRows {
+			return nil, nil
+		}
+
+		return nil, errors.Wrap(err, "error al escanear el resultado de la consulta GetUsuarioByEmail")
 	}
 
 	return &usuario, nil
@@ -134,7 +203,7 @@ func (c *conn) CreateUsuario(email, contrasenia string) error {
 		INSERT INTO usuarios(email, contrasenia)
 		VALUES(?, ?)`, email, contrasenia)
 	if err != nil {
-		return errors.Wrap(err, "No se pudo ejecutar query para crear usuario")
+		return errors.Wrap(err, "no se pudo ejecutar query para crear usuario")
 	}
 
 	return nil
