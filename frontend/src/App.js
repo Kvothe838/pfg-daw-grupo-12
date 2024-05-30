@@ -4,9 +4,9 @@ import Navbar from '../src/components/Navbar/Navbar';
 import Welcome from '../src/components/Welcome/Welcome';
 import LoginForm from '../src/components/Login/Login';
 import RegisterForm from '../src/components/RegisterForm/RegisterForm';
-import Nutricional from './components/Nutrtional-guide/guide';
-
-import './index.css';
+import Nutricional from '../src/components/Nutrtional-guide/guide';
+import Paso from '../src/components/Paso/Paso';
+import Footer from '../src/components/Footer/Footer';
 
 const App = () => {
   const [user, setUser] = useState(null);
@@ -26,12 +26,14 @@ const App = () => {
   return (
     <Router>
       <div>
-        <Navbar email={user?.email} onLogout={handleLogout} />
+        {/* <Navbar email={user?.email} onLogout={handleLogout} /> */}
         <Routes>
           <Route path="/" element={<Welcome />} />
           <Route path="/login" element={<LoginForm onLogin={handleLogin} />} />
           <Route path="/register" element={<RegisterForm onRegister={handleRegister} />} />
           <Route path="/nutritional-guide" element={<Nutricional />} />
+          <Route path="/paso" element={<Paso />} />
+          <Route path="/footer" element={<Footer />} />
         </Routes>
       </div>
     </Router>
