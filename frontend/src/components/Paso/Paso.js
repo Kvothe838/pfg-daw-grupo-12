@@ -34,12 +34,15 @@ const Paso = () => {
     <>
       <Navbar />
       <div className="paso-container">
-        <h2 className="paso-header">PASO y PASO</h2>
+        <h2 className="paso-header">Paso a Paso</h2>
         </div>
         <br></br>
         <div className='bck'>
             <br></br>
         <div className="paso-content">
+          <div className='brief'>
+          En esta sección, ayudamos a los usuarios a entender cómo pueden avanzar de un nivel de guerrero a otro, ya sea de principiante a intermedio, o de intermedio a imbatible. Aquí están los pasos clave que podríamos incluir:
+          </div>
           {steps.map((step, index) => (
             <div key={index} className="paso-step">
               <h3>{step.title}</h3>
