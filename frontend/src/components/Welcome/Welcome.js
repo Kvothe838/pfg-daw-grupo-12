@@ -2,8 +2,9 @@
 
 import React from 'react';
 import './Welcome.css';
-import logo from '../../assets/LOGO-FYNC.jpg';
+
 import Navbar from '../Navbar/Navbar';
+import Footer from '../Footer/Footer';
 
 const Welcome = () => {
   return (
@@ -19,7 +20,7 @@ const Welcome = () => {
             <h2>Fitness and Nutrition Center</h2>
           </div>
         </div>
-        <img src={logo} alt="Logo" className="logo" />
+
       </div>
       <div className="content-section">
         <div className="content">
@@ -28,6 +29,7 @@ const Welcome = () => {
           <p className="text">¡A POR TODAS GUERREROS!</p>
         </div>
       </div>
+      < Footer />
     </>
   );
 };

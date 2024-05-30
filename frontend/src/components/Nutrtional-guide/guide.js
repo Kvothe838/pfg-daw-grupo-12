@@ -17,6 +17,7 @@ import vegetablesImage from '../../assets/veg.jpeg';
 import grainsImage from '../../assets/grain.jpeg';
 import wholeGrainImage from '../../assets/wholegrain.jpeg';
 import Navbar from '../Navbar/Navbar';
+import Footer from '../Footer/Footer';
 
 const Guide = () => {
   const [modalContent, setModalContent] = useState(null);
@@ -124,7 +125,9 @@ const Guide = () => {
           )}
         </main>
       </div>
+      <Footer />
     </>
+
   );
 };
 

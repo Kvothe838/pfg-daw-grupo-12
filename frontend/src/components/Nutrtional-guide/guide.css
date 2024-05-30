@@ -99,11 +99,11 @@ body {
 }
 
 .section {
-  margin-bottom: 40px;
+  margin-bottom: 1px;
 }
 
 .content-block {
-  margin-bottom: 60px;
+  margin-bottom: 15px;
   padding: 20px;
   border-radius: 10px;
   background-size: cover;
@@ -113,7 +113,7 @@ body {
 
 .content-block h2 {
   font-size: 2.5rem;
-  margin-bottom: 20px;
+ 
   text-align: center;
   font-family: 'Montserrat', sans-serif;
   letter-spacing: 2px;

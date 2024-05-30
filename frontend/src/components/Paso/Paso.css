@@ -32,6 +32,7 @@ body {
 .bck {
   background-image: url("../../assets/guide.jpeg"); /* Background image for PASO y PASO */
   background-size: cover;
+  padding: 10px;
 }
 
 /* Paso y Paso Content */

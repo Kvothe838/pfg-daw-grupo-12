@@ -1,6 +1,7 @@
 import React from 'react';
 import './Paso.css';
 import Navbar from '../Navbar/Navbar';
+import Footer from '../Footer/Footer';
 
 const Paso = () => {
   const steps = [
@@ -52,6 +53,7 @@ const Paso = () => {
           ))}
         </div>
         </div>
+        < Footer/>
     </>
   );
 };

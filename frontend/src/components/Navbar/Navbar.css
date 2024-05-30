@@ -30,7 +30,7 @@
 
 .nav .links button,
 .nav .links a {
-  background-color: #6b0b22b3; /* Change button background color */
+  background-color: rgba(127, 234, 203, 0.41); /* Change button background color */
   color: white;
   border: solid;
   cursor: pointer;
@@ -43,7 +43,7 @@
 
 .nav .links button:hover,
 .nav .links a:hover {
-  background-color: #380c16b3; /* Change button hover color */
+  background-color: #62d1cab3; /* Change button hover color */
 }
 
 .nav .dropdown {
