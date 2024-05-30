@@ -1,0 +1,91 @@
+/* Paso.css */
+
+/* General Styles */
+body {
+    font-family: 'Arial', sans-serif;
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    background: #f5f5f5; /* Light background for the rest of the page */
+    color: #333;
+  }
+  
+  /* Paso y Paso Container */
+  .paso-container {
+    background-image: url('../../assets/guide.jpeg'); /* Background image for PASO y PASO */
+    background-size: cover;
+    background-position: center;
+    padding: 200px 20px;
+    color: #fff; /* Light text color for better contrast against background image */
+  }
+  
+  /* Header */
+  .paso-header {
+    text-align: center;
+    font-size: 3rem;
+    margin-bottom: 40px;
+    font-weight: bold;
+    color: #ffffff; 
+    margin-top: 100px;
+  }
+
+  .bck {
+    background-image: url('../../assets/guide.jpeg'); /* Background image for PASO y PASO */
+    background-size: cover;
+  }
+  
+  /* Paso y Paso Content */
+  .paso-content {
+    margin-left: 10%;
+    margin-right: 10%;
+    background-color: rgba(16, 103, 78, 0.849); 
+    padding: 40px;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  }
+  
+  /* Individual Steps */
+  .paso-step {
+    margin-bottom: 40px;
+    padding: 20px;
+    border-radius: 10px;
+    background-color: #c5c02d; /* Bright yellow background for steps */
+    color: #333; /* Dark text color for readability */
+    transition: transform 0.3s ease-in-out;
+  }
+  
+  .paso-step:hover {
+    transform: translateY(-10px);
+    background-color: #9a831d; /* Slightly darker yellow on hover */
+  }
+  
+  .paso-step h3 {
+    font-size: 2rem;
+    margin-bottom: 10px;
+    color: #000; /* Black for headings */
+  }
+  
+  .paso-step p {
+    font-size: 1.4rem;
+    line-height: 1.6;
+  }
+  
+  /* Responsive Styles */
+  @media (max-width: 768px) {
+    .paso-header {
+      font-size: 2.5rem;
+    }
+  
+    .paso-content {
+      padding: 20px;
+    }
+  
+    .paso-step h3 {
+      font-size: 1.5rem;
+    }
+  
+    .paso-step p {
+      font-size: 1rem;
+    }
+  }
+  

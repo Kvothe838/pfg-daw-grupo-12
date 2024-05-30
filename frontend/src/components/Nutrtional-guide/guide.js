@@ -1,6 +1,5 @@
 import React, { useState } from 'react';
 import './guide.css';
-import pyramidImage from '../../assets/nutritional.jpg';
 import avocadoImage from '../../assets/avocado.jpeg';
 import oliveOilImage from '../../assets/oil.jpeg';
 import nutsImage from '../../assets/nuts.jpeg';

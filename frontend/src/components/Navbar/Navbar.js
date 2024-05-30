@@ -21,8 +21,8 @@ const Navbar = ({ email, onLogout }) => {
           <Link  className="dropbtn">Services</Link>
           <div className="dropdown-content">
             <Link to="/exercises">Exercises</Link>
-            <Link to="/guide-plan">Guide Plan</Link>
-            <Link to="/nutritional-guide">Nutritional Guide</Link>
+            <Link to="/paso">Paso a Paso</Link>
+            <Link to="/nutritional-guide">Guía Nutricional</Link>
           </div>
         </div>
         {email ? (
