@@ -1,94 +1,165 @@
-/* guide.css */
-body {
-    font-family: 'Arial', sans-serif;
-    background-color: #f9f9f9;
-    margin: 0;
-    padding: 0;
-    overflow-x: hidden; /* Ensure horizontal overflow doesn't show */
+.modal {
+  display: none;
+  position: fixed;
+  z-index: 1;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  overflow: auto;
+  background-color: rgba(0, 0, 0, 0.5); /* Dark semi-transparent background */
 }
 
-.guide {
-    max-width: 1200px;
-    margin: 0 auto;
-    padding: 20px;
-    position: relative;
-    overflow-x: auto; /* Make the guide section scrollable */
-    max-height: calc(100vh - 40px); /* Adjust the max-height as needed */
+.modal-content {
+  background-color: #d33e63f8; /* Light background for contrast */
+  margin: 15% auto;
+  padding: 20px;
+  border: 1px solid #888;
+  width: 80%;
+  max-width: 500px;
+  border-radius: 10px;
+  text-align: center; /* Center align text and content */
+  color: #333; /* Dark text color for contrast */
+}
+
+.close {
+  color: rgb(253, 253, 253);
+  float: right;
+  font-size: 35px;
+  font-weight: bold;
+}
+
+.close:hover,
+.close:focus {
+  color: black;
+  text-decoration: none;
+  cursor: pointer;
+}
+
+.modal-content img {
+  display: block;
+  margin: 0 auto 20px; /* Center image and add margin */
+  width: 100px; /* Adjust image size */
+  height: 100px;
+  object-fit: cover;
+  border-radius: 50%;
+}
+
+body {
+  margin: 0;
+  padding: 0;
+  font-family: Arial, sans-serif;
+  overflow-x: hidden;
 }
 
 .header {
-    background-color: #ff6f61;
-    color: white;
-    padding: 20px;
-    text-align: center;
-    border-radius: 8px;
-    margin-bottom: 20px;
+  background-image: url('../../assets/guide.jpeg');
+  background-size: cover;
+  background-position: center;
+  height: 70vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: white;
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
 }
 
 .header h1 {
-    margin: 0;
-    font-size: 2.5em;
+  font-size: 4rem;
+  text-align: center;
+  margin-top: 120px;
 }
 
-.main-content {
-    display: flex;
-    flex-direction: column;
-    gap: 20px;
+.contents {
+  background-image: url('../../assets/diet.jpeg');
+  background-size: cover;
+  text-align: center;
+  padding: 20px;
+  border-radius: 10px;
+  margin-top: 10px;
 }
 
 .intro {
-    background-color: #fff;
-    border-radius: 8px;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-    padding: 20px;
-    margin-bottom: 20px;
+  margin: auto;
+  max-width: 1000px;
+  padding: 20px;
+  border: 4px solid white;
+  background-color: rgba(255, 255, 255, 0.103);
+  box-shadow: 0 4px 8px rgba(45, 5, 5, 0.1);
+  border-radius: 10px;
+  justify-content: center;
 }
 
 .intro p {
-    margin: 0;
-    margin-bottom: 10px;
+  font-size: 1.2rem;
+  line-height: 1.6;
+  margin-bottom: 20px;
+  color: rgb(255, 255, 255);
+  font-weight: bold;
 }
 
-.content {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 20px;
-     /* Ensure even spacing between boxes */
+.section {
+  margin-bottom: 40px;
 }
 
 .content-block {
-    background-color: #e3f2fd;
-    border-radius: 8px;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-    padding: 20px;
-    width: calc(33% - 20px); /* Adjust width to fit three boxes in a row */
-    display: flex;
-    flex-direction: column;
-    align-items: center;
+  margin-bottom: 60px;
+  padding: 20px;
+  border-radius: 10px;
+  background-size: cover;
+  color: black;
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
 }
 
 .content-block h2 {
-    font-size: 1.5em;
-    color: #df862d;
-    margin-bottom: 10px;
-    text-align: center;
+  font-size: 2.5rem;
+  margin-bottom: 20px;
+  text-align: center;
+  font-family: 'Montserrat', sans-serif;
+  letter-spacing: 2px;
 }
 
-.content-block img {
-    width: 100px;
-    height: 80px;
-    border-radius: 8px;
-    margin-bottom: 10px;
+.content-block ul {
+  list-style-type: none;
+  padding: 0;
 }
 
-.content-block p {
-    text-align: center;
+.content-block li {
+  display: flex;
+  align-items: center;
+  margin-bottom: 20px;
+  cursor: pointer;
+  background-color: rgba(233, 232, 183, 0.8);
+  padding: 10px;
+  border-radius: 5px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  transition: transform 0.3s ease-in-out;
 }
 
-.content-block:nth-child(odd) {
-    background-color: #ffebee;
+.content-block li:hover {
+  transform: scale(1.05);
 }
 
-.content-block:nth-child(even) {
-    background-color: #e8f5e9;
+.icon {
+  width: 50px;
+  height: 50px;
+  margin-right: 15px;
+  border-radius: 50%;
+  object-fit: cover;
+}
+
+.modal.show {
+  display: block;
+}
+
+.grasas-saludables {
+  background-color: rgba(16, 103, 78, 0.849);
+}
+
+.fuentes-proteinas {
+  background-color: rgba(114, 4, 114, 0.823);
+}
+
+.ricos-fibra {
+  background-color: rgba(128, 128, 0, 0.7);
 }
