@@ -8,6 +8,7 @@ import Nutricional from '../src/components/Nutrtional-guide/guide';
 import Paso from '../src/components/Paso/Paso';
 import Footer from '../src/components/Footer/Footer';
 import Contact from '../src/components/Contact/Contact';
+import About from '../src/components/About/About';
 
 const App = () => {
   const [user, setUser] = useState(null);
@@ -36,6 +37,7 @@ const App = () => {
           <Route path="/paso" element={<Paso />} />
           <Route path="/footer" element={<Footer />} />
           <Route path="/contact" element={<Contact />} />
+          <Route path="/about" element={<About />} />
 
         </Routes>
       </div>

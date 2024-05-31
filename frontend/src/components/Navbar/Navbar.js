@@ -14,8 +14,8 @@ const Navbar = ({ email, onLogout }) => {
     <div className="nav">
       <img src={logo} alt="Logo" className="logos" />
       <div className="links">
-        <Link to="/">Home</Link>
-        <Link to="/about">About Us</Link>
+        <Link to="/">Inicio</Link>
+        <Link to="/about">Nosotros</Link>
         <Link to="/contact">Contact Us</Link>
         <div className="dropdown">
           <Link  className="dropbtn">Services</Link>

@@ -1,0 +1,68 @@
+
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap');
+
+.about-container {
+  width: 100%;
+  background-image: url('../../assets/bck.webp');
+  background-size: cover;
+  background-position: center;
+  padding: 50px 20px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-family: 'Roboto', sans-serif;
+}
+
+.about-content {
+  max-width: 1200px;
+  background-color: #ffffff;
+  padding: 40px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+  border-radius: 12px;
+  text-align: center;
+}
+
+.about-content h1 {
+  font-size: 3rem;
+  margin-bottom: 20px;
+  color: #10674e;
+  position: relative;
+  display: inline-block;
+  padding-bottom: 10px;
+}
+
+.about-content h1::after {
+  content: '';
+  width: 50px;
+  height: 5px;
+  background-color: #10674e;
+  position: absolute;
+  bottom: 0;
+  left: 50%;
+  transform: translateX(-50%);
+}
+
+.about-content p {
+  font-size: 1.2rem;
+  line-height: 1.8;
+  margin-bottom: 20px;
+  color: #333333;
+  text-align: justify;
+}
+
+.about-content ul {
+  list-style-type: disc;
+  margin-left: 20px;
+  margin-bottom: 20px;
+  text-align: left;
+}
+
+.about-content li {
+  font-size: 1.2rem;
+  line-height: 1.8;
+  color: #333333;
+}
+
+.about-content ul li::marker {
+  color: #10674e;
+}
