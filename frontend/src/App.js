@@ -13,9 +13,13 @@ import Excercise from '../src/components/ExerciseDatabase/ExerciseDatabase';
 import GuerreroPrincipiante from '../src/components/PlandeEjercicios/GuerreroPrincipiante';
 import GuerreroIntermedio from '../src/components/PlandeEjercicios/GuerreroIntermedio';
 import GuerreroAvanzado from '../src/components/PlandeEjercicios/GuerreroAvanzado';
+import PlanSelection from '../src/components/PlanSelection/PlanSelection';
+import PlanCRUD from '../src/components/PlanCRUD/PlanCRUD';
+import CreatePlan from '../src/components/PlanCRUD/CreatePlan';
 
 const App = () => {
   const [user, setUser] = useState(null);
+  const [selectedPlan, setSelectedPlan] = useState(null);
 
   const handleLogin = (email, password) => {
     setUser({ email, password });
@@ -27,12 +31,17 @@ const App = () => {
 
   const handleLogout = () => {
     setUser(null);
+    setSelectedPlan(null);
+  };
+
+  const handlePlanSelect = (plan) => {
+    setSelectedPlan(plan);
   };
 
   return (
     <Router>
       <div>
-        {/* <Navbar email={user?.email} onLogout={handleLogout} /> */}
+        <Navbar email={user?.email} onLogout={handleLogout} />
         <Routes>
           <Route path="/" element={<Welcome />} />
           <Route path="/login" element={<LoginForm onLogin={handleLogin} />} />
@@ -43,10 +52,16 @@ const App = () => {
           <Route path="/contact" element={<Contact />} />
           <Route path="/about" element={<About />} />
           <Route path="/ejercicios" element={<Excercise />} />
-          <Route path="/guerrero-principiante" element={<GuerreroPrincipiante/>} />
-        <Route path="/guerrero-intermedio" element={<GuerreroIntermedio/>} />
-        <Route path="/guerrero-avanzado" element={<GuerreroAvanzado/>} />
-
+          <Route path="/guerrero-principiante" element={<GuerreroPrincipiante />} />
+          <Route path="/guerrero-intermedio" element={<GuerreroIntermedio />} />
+          <Route path="/guerrero-avanzado" element={<GuerreroAvanzado />} />
+          <Route path="/plan-selection" element={<PlanSelection onSelectPlan={<handlePlanSelect/>} />} /> {/* Added route */}
+          {selectedPlan && (
+            <>
+            <Route path="/plan-crud" element={<PlanCRUD plan={selectedPlan} />} />
+            <Route path="/create-plan" element={<CreatePlan plan={selectedPlan}  />} />
+          </>
+          )}
         </Routes>
       </div>
     </Router>

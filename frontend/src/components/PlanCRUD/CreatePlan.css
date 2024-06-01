@@ -1,0 +1,22 @@
+/* src/components/PlanCRUD/CreatePlan.css */
+.modal {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background: white;
+    padding: 20px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    z-index: 1000;
+  }
+  
+  .modal p {
+    margin: 0;
+    padding: 10px 0;
+  }
+  
+  .modal button {
+    display: block;
+    margin: 10px auto 0;
+  }
+  

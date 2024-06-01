@@ -1,11 +1,12 @@
-import React, { useState  } from 'react';
+import React, { useState } from 'react';
 import './Login.css';
-import { Link } from 'react-router-dom';
+import { useNavigate, Link } from 'react-router-dom';
 
 const LoginForm = ({ onLogin }) => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [error, setError] = useState('');
+  const navigate = useNavigate();
 
   const validateEmail = (email) => {
     return /\S+@\S+\.\S+/.test(email);
@@ -50,6 +51,7 @@ const LoginForm = ({ onLogin }) => {
       .then(data => {
         console.log('Login successful', data);
         onLogin(email, password);
+        navigate('/plan-selection');
       })
       .catch(error => {
         setError(error.message);
@@ -59,29 +61,29 @@ const LoginForm = ({ onLogin }) => {
 
   return (
     <>
-    <div className="background-login"></div>
-    <div className="login-form">
-      <h2>Welcome Back !!</h2>
-      {error && <div className="error">{error}</div>}
-      <form onSubmit={handleSubmit}>
-        <label>Email:</label>
-        <input
-          type="email"
-          value={email}
-          onChange={(e) => setEmail(e.target.value)}
-          required
-        />
-        <label>Password:</label>
-        <input
-          type="password"
-          value={password}
-          onChange={(e) => setPassword(e.target.value)}
-          required
-        />
-        <button type="submit">Login</button>
-        <p>Haven't Register Yourself? <Link to={'/register'}> Register Here! </Link> </p>
-      </form>
-    </div>
+      <div className="background-login"></div>
+      <div className="login-form">
+        <h2>Welcome Back !!</h2>
+        {error && <div className="error">{error}</div>}
+        <form onSubmit={handleSubmit}>
+          <label>Email:</label>
+          <input
+            type="email"
+            value={email}
+            onChange={(e) => setEmail(e.target.value)}
+            required
+          />
+          <label>Password:</label>
+          <input
+            type="password"
+            value={password}
+            onChange={(e) => setPassword(e.target.value)}
+            required
+          />
+          <button type="submit">Login</button>
+          <p>Haven't Register Yourself? <Link to={'/register'}> Register Here! </Link> </p>
+        </form>
+      </div>
     </>
   );
 };
