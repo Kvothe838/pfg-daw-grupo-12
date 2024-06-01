@@ -18,11 +18,19 @@ const Navbar = ({ email, onLogout }) => {
         <Link to="/about">Nosotros</Link>
         <Link to="/contact">Contact Us</Link>
         <div className="dropdown">
+          <Link  className="dropbtn">Plan</Link>
+          <div className="dropdown-content">
+            <Link to="/guerrero-principiante">Guerrero Principiante</Link>
+            <Link to="/guerrero-intermedio">Guerrero Intermedio</Link>
+            <Link to="/guerrero-avanzado">GuerreroAvanzado</Link>
+          </div>
+        </div>
+        <div className="dropdown">
           <Link  className="dropbtn">Services</Link>
           <div className="dropdown-content">
-            <Link to="/exercises">Exercises</Link>
-            <Link to="/paso">Paso a Paso</Link>
             <Link to="/nutritional-guide">Guía Nutricional</Link>
+            <Link to="/ejercicios">Database Exercises</Link>
+            <Link to="/paso">Paso a Paso</Link>
           </div>
         </div>
         {email ? (

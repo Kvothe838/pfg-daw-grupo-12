@@ -1,0 +1,75 @@
+.principiante-container {
+    padding: 20px;
+    background-color: #f4f4f4;
+    margin-top: 80px; /* Add top margin */
+  }
+  
+  .principiante-content {
+    max-width: 800px;
+    margin: 0 auto;
+    background: #ffffff;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  }
+  
+  .principiante-content h1 {
+    font-size: 2.5em;
+    color: #e91e63;
+    text-align: center;
+    margin-bottom: 20px;
+  }
+  
+  .principiante-content h2 {
+    font-size: 2em;
+    color: #e91e63;
+    margin-top: 30px;
+    background-color: #fce4ec;
+    padding: 10px;
+    border-radius: 5px;
+  }
+  
+  .principiante-content h3 {
+    font-size: 1.5em;
+    color: #333333;
+    margin-top: 20px;
+  }
+  
+  .principiante-content p {
+    font-size: 1em;
+    color: #555555;
+    line-height: 1.6;
+  }
+  
+  .principiante-content ol {
+    padding-left: 20px;
+    margin-bottom: 20px;
+  }
+  
+  .principiante-content li {
+    margin-bottom: 10px;
+  }
+  
+  .principiante-content ul {
+    list-style-type: disc;
+    padding-left: 20px;
+    margin-top: 10px;
+  }
+  
+  .plan-section {
+    margin-top: 20px;
+    padding: 15px;
+    background-color: #fff3e0;
+    border-radius: 8px;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+  }
+  
+  .plan-section h3 {
+    margin-top: 10px;
+  }
+  
+  .plan-section ul,
+  .plan-section ol {
+    margin-top: 10px;
+  }
+  

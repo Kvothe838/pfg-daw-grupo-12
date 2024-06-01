@@ -1,0 +1,72 @@
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap');
+
+.exercise-container {
+  width: 100%;
+  background-color: #f9f9f9;
+  padding: 50px 20px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-family: 'Roboto', sans-serif;
+}
+
+.exercise-content {
+  max-width: 1200px;
+  background-color: #ffffff;
+  padding: 40px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+  border-radius: 12px;
+  text-align: left;
+}
+
+.exercise-content h1 {
+  font-size: 3rem;
+  margin-bottom: 20px;
+  color: #10674e;
+  position: relative;
+  display: inline-block;
+  padding-bottom: 10px;
+  text-align: center;
+}
+
+.exercise-content h1::after {
+  content: '';
+  width: 50px;
+  height: 5px;
+  background-color: #10674e;
+  position: absolute;
+  bottom: 0;
+  left: 50%;
+  transform: translateX(-50%);
+}
+
+.exercise-content p {
+  font-size: 1.2rem;
+  line-height: 1.8;
+  margin-bottom: 20px;
+  color: #333333;
+  text-align: center;
+}
+
+.exercise-content ol {
+  margin-left: 20px;
+  margin-bottom: 20px;
+  text-align: left;
+}
+
+.exercise-content li {
+  font-size: 1.2rem;
+  line-height: 1.8;
+  color: #333333;
+  margin-bottom: 10px;
+}
+
+.exercise-content ul {
+  list-style-type: circle;
+  margin-left: 40px;
+  margin-bottom: 10px;
+}
+
+.exercise-content ul li::marker {
+  color: #10674e;
+}
