@@ -3,7 +3,7 @@ import Navbar from '../Navbar/Navbar';
 import Footer from '../Footer/Footer';
 import './GuerreroPrincipiante.css';
 
-const GuerreroAvanzado = () => {
+const GuerreroAvanzado = ({ plans }) => {
   return (
     <>
       <Navbar />
@@ -245,6 +245,15 @@ const GuerreroAvanzado = () => {
               </li>
             </ol>
           </div>
+
+          {plans.map((plan, index) => (
+            <div key={index} className="plan-section">
+              <h2>{plan.title}</h2>
+              <p>{plan.description}</p>
+              <div>{plan.details}</div>
+            </div>
+          ))}
+
         </div>
       </div>
       <Footer />

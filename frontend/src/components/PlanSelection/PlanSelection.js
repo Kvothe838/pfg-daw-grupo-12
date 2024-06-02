@@ -1,26 +1,29 @@
+// PlanSelection.js
 import React, { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
+import './PlanSelection.css';
 
 const PlanSelection = ({ onSelectPlan }) => {
-  const [selectedPlan, setSelectedPlan] = useState('');
-
-  const handlePlanChange = (e) => {
-    setSelectedPlan(e.target.value);
-  };
+  const [selectedLevel, setSelectedLevel] = useState('');
+  const navigate = useNavigate();
 
   const handleAccept = () => {
-    onSelectPlan(selectedPlan);
+    onSelectPlan(selectedLevel);
+    navigate('/plan-crud');
   };
 
   return (
-    <div>
-      <h2>Elige el nivel que más se adapte a ti</h2>
-      <select value={selectedPlan} onChange={handlePlanChange}>
-        <option value="">Elige algún plan</option>
-        <option value="principiante">Guerrero principiante</option>
-        <option value="intermedio">Guerrero intermedio</option>
-        <option value="avanzado">Guerrero avanzado</option>
-      </select>
-      <button onClick={handleAccept}>Aceptar</button>
+    <div className='containers'>
+      <h2 className="heading">Elige el nivel que más se adapte a ti</h2>
+      <div className="dropdowns">
+        <select value={selectedLevel} onChange={(e) => setSelectedLevel(e.target.value)}>
+          <option value="">Elige algún plan</option>
+          <option value="Guerrero principiante">Guerrero principiante</option>
+          <option value="Guerrero intermedio">Guerrero intermedio</option>
+          <option value="Guerrero avanzado">Guerrero avanzado</option>
+        </select>
+        <button onClick={handleAccept}>Aceptar</button>
+      </div>
     </div>
   );
 };

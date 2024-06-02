@@ -3,7 +3,7 @@ import Navbar from '../Navbar/Navbar';
 import Footer from '../Footer/Footer';
 import './GuerreroPrincipiante.css';
 
-const GuerreroPrincipiante = () => {
+const GuerreroPrincipiante = ({ plans }) => {
   return (
     <>
       <Navbar />
@@ -132,7 +132,18 @@ const GuerreroPrincipiante = () => {
             <p>Realiza una actividad ligera como caminar, nadar o hacer yoga durante 30-45 minutos.</p>
           </div>
 
-          <p>Recuerda que es importante escuchar a tu cuerpo y ajustar la intensidad según tu nivel de comodidad. Con el tiempo, puedes aumentar la intensidad y la duración de los ejercicios a medida que te sientas más fuerte y seguro. ¡Disfruta de tu entrenamiento y continúa avanzando!</p>
+          
+
+          {plans.map((plan, index) => (
+            <div key={index} className="plan-section">
+              <h2>{plan.title}</h2>
+              <p>{plan.description}</p>
+              <div>{plan.details}</div>
+            </div>
+          ))}
+
+<p>Recuerda que es importante escuchar a tu cuerpo y ajustar la intensidad según tu nivel de comodidad. Con el tiempo, puedes aumentar la intensidad y la duración de los ejercicios a medida que te sientas más fuerte y seguro. ¡Disfruta de tu entrenamiento y continúa avanzando!</p>
+
         </div>
       </div>
       <Footer />

@@ -3,7 +3,7 @@ import Navbar from '../Navbar/Navbar';
 import Footer from '../Footer/Footer';
 import './GuerreroPrincipiante.css';
 
-const GuerreroIntermedio = () => {
+const GuerreroIntermedio = ({ plans }) => {
   return (
     <>
       <Navbar />
@@ -200,7 +200,19 @@ const GuerreroIntermedio = () => {
             </ol>
           </div>
 
-          <p>A medida que avanzas en tu nivel de condición física, puedes aumentar la carga de trabajo, la intensidad de los ejercicios o la duración de los intervalos de cardio. ¡Sigue desafiándote a ti mismo y disfruta del progreso!</p>
+        
+            {plans.map((plan, index) => (
+            <div key={index} className="plan-section">
+              <h2>{plan.title}</h2>
+              <p>{plan.description}</p>
+              <div>{plan.details}</div>
+            </div>
+          ))}
+
+            <p>A medida que avanzas en tu nivel de condición física, puedes aumentar la carga de trabajo, la intensidad de los ejercicios 
+            o la duración de los intervalos de cardio. ¡Sigue desafiándote a ti mismo y disfruta del progreso!</p>
+
+
         </div>
       </div>
       <Footer />

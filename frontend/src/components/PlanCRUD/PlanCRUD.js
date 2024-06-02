@@ -14,7 +14,7 @@ const PlanCRUD = ({ plan, plans }) => {
     if (operation === 'create') {
       navigate('/create-plan');
     } else {
-      // Handle other operations
+      // Handle other operations if needed
     }
   };
 

@@ -1,4 +1,3 @@
-// src/components/PlanCRUD/CreatePlan.js
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import './CreatePlan.css';
@@ -6,13 +5,16 @@ import './CreatePlan.css';
 const CreatePlan = ({ plan, onCreatePlan }) => {
   const [title, setTitle] = useState('');
   const [description, setDescription] = useState('');
+  const [details, setDetails] = useState('');
   const [message, setMessage] = useState('');
   const navigate = useNavigate();
 
-  const handleSave = () => {
+  const handleSave = (e) => {
+    e.preventDefault();
     const newPlan = {
       title,
       description,
+      details,
       planType: plan,
     };
 
@@ -34,8 +36,9 @@ const CreatePlan = ({ plan, onCreatePlan }) => {
       });
   };
 
-  const handleCancel = () => {
-    navigate('/plan-crud');
+  const handleCloseModal = () => {
+    setMessage('');
+    navigate('/plan-selection');
   };
 
   return (
@@ -47,7 +50,7 @@ const CreatePlan = ({ plan, onCreatePlan }) => {
           <input
             type="text"
             value={title}
-            onChange={e => setTitle(e.target.value)}
+            onChange={(e) => setTitle(e.target.value)}
           />
         </label>
         <br />
@@ -55,21 +58,29 @@ const CreatePlan = ({ plan, onCreatePlan }) => {
           Description:
           <textarea
             value={description}
-            onChange={e => setDescription(e.target.value)}
+            onChange={(e) => setDescription(e.target.value)}
+          />
+        </label>
+        <br />
+        <label>
+          Full Diet Plan:
+          <textarea
+            value={details}
+            onChange={(e) => setDetails(e.target.value)}
           />
         </label>
         <br />
         <button type="button" onClick={handleSave}>
           Save
         </button>
-        <button type="button" onClick={handleCancel}>
+        <button type="button" onClick={handleCloseModal}>
           Cancel
         </button>
       </form>
       {message && (
         <div className="modal">
           <p>{message}</p>
-          <button onClick={() => setMessage('')}>Close</button>
+          <button onClick={handleCloseModal}>Close</button>
         </div>
       )}
     </div>

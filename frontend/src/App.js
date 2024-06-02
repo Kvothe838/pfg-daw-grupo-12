@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 import Navbar from '../src/components/Navbar/Navbar';
 import Welcome from '../src/components/Welcome/Welcome';
@@ -17,9 +17,23 @@ import PlanSelection from '../src/components/PlanSelection/PlanSelection';
 import PlanCRUD from '../src/components/PlanCRUD/PlanCRUD';
 import CreatePlan from '../src/components/PlanCRUD/CreatePlan';
 
-const App = () => {
+const App = () => {  
   const [user, setUser] = useState(null);
   const [selectedPlan, setSelectedPlan] = useState(null);
+  const [plans, setPlans] = useState([]);
+
+  // Load plans from local storage when the component mounts
+  useEffect(() => {
+    const savedPlans = JSON.parse(localStorage.getItem('plans'));
+    if (savedPlans) {
+      setPlans(savedPlans);
+    }
+  }, []);
+
+  // Save plans to local storage whenever the plans state changes
+  useEffect(() => {
+    localStorage.setItem('plans', JSON.stringify(plans));
+  }, [plans]);
 
   const handleLogin = (email, password) => {
     setUser({ email, password });
@@ -38,6 +52,12 @@ const App = () => {
     setSelectedPlan(plan);
   };
 
+  const handlePlanCreate = (newPlan) => {
+    const updatedPlans = [...plans, newPlan];
+    setPlans(updatedPlans);
+  };
+
+
   return (
     <Router>
       <div>
@@ -52,14 +72,16 @@ const App = () => {
           <Route path="/contact" element={<Contact />} />
           <Route path="/about" element={<About />} />
           <Route path="/ejercicios" element={<Excercise />} />
-          <Route path="/guerrero-principiante" element={<GuerreroPrincipiante />} />
-          <Route path="/guerrero-intermedio" element={<GuerreroIntermedio />} />
-          <Route path="/guerrero-avanzado" element={<GuerreroAvanzado />} />
-          <Route path="/plan-selection" element={<PlanSelection onSelectPlan={<handlePlanSelect/>} />} /> {/* Added route */}
+          <Route path="/guerrero-principiante" element={<GuerreroPrincipiante plans={plans.filter(p => p.planType === 'Guerrero principiante')} />} />
+<Route path="/guerrero-intermedio" element={<GuerreroIntermedio plans={plans.filter(p => p.planType === 'Guerrero intermedio')} />} />
+<Route path="/guerrero-avanzado" element={<GuerreroAvanzado plans={plans.filter(p => p.planType === 'Guerrero avanzado')} />} />
+
+          <Route path="/plan-selection" element={<PlanSelection onSelectPlan={handlePlanSelect} />} />
           {selectedPlan && (
             <>
-            <Route path="/plan-crud" element={<PlanCRUD plan={selectedPlan} />} />
-            <Route path="/create-plan" element={<CreatePlan plan={selectedPlan}  />} />
+             <Route path="/plan-crud" element={<PlanCRUD plan={selectedPlan} plans={plans} />} />
+              <Route path="/create-plan" element={<CreatePlan plan={selectedPlan} onCreatePlan={handlePlanCreate} />} />
+          
           </>
           )}
         </Routes>
