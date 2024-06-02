@@ -24,7 +24,6 @@ const PlanCRUD = ({ plan, plans }) => {
       <select value={operation} onChange={handleOperationChange}>
         <option value="">Choose operation</option>
         <option value="create">Create</option>
-        <option value="read">Read</option>
         <option value="update">Update</option>
         <option value="delete">Delete</option>
       </select>

@@ -135,10 +135,12 @@ const GuerreroPrincipiante = ({ plans }) => {
           
 
           {plans.map((plan, index) => (
-            <div key={index} className="plan-section">
+            <div key={index} >
               <h2>{plan.title}</h2>
+              <div className='plan-section'>
               <p>{plan.description}</p>
               <div>{plan.details}</div>
+              </div>
             </div>
           ))}
 

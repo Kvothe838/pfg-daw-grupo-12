@@ -54,11 +54,11 @@ const exercises = [
 
 
 const ExerciseDatabase = () => {
-  const [visibleExercises, setVisibleExercises] = useState(9); // Show 9 exercises initially
+  const [visibleExercises, setVisibleExercises] = useState(10); // Show 9 exercises initially
   const [selectedExercise, setSelectedExercise] = useState(null);
 
   const showMoreExercises = () => {
-    setVisibleExercises(prev => prev + 9); // Show 9 more exercises when "Show More" button is clicked
+    setVisibleExercises(prev => prev + 8); // Show 9 more exercises when "Show More" button is clicked
   };
 
   const openModal = (exercise) => {
@@ -74,8 +74,8 @@ const ExerciseDatabase = () => {
       <Navbar />
       <div className="exercise-container">
         <div className="exercise-content">
-          <h1>Base de Datos de Ejercicios</h1>
-          <p>En esta sección, os enseñaremos cómo realizar los ejercicios anteriormente pautados.</p>
+          <h1 className='ex'>Base de Datos de Ejercicios</h1>
+          <p >En esta sección, os enseñaremos cómo realizar los ejercicios anteriormente pautados.</p>
           <div className="exercise-grid">
             {exercises.slice(0, visibleExercises).map((exercise) => (
               <div key={exercise.id} className="exercise-card" onClick={() => openModal(exercise)}>

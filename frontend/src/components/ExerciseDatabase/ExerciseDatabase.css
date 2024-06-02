@@ -1,3 +1,36 @@
+body {
+  margin: 0;
+  font-family: Arial, sans-serif;
+}
+
+/* Navbar Styles */
+.navbar {
+  background-color: rgba(16, 103, 78, 0.849);
+  padding: 10px 20px;
+  color: #fff;
+  position: fixed;
+  top: 0;
+  width: 100%;
+  z-index: 1000;
+}
+
+/* Main Container Styles */
+.exercise-container {
+  margin-top: 60px; /* Adjust this margin to make space for the fixed navbar */
+  background-image: url("../../assets/guide.jpeg"); 
+  background-size: cover;
+  padding: 10px; /* Updated background color for contrast */
+  padding: 20px;
+}
+.ex {
+    color: #ffffff;
+}
+.exercise-content {
+  max-width: 1200px;
+  margin: auto;
+}
+
+/* Grid Styles */
 .exercise-grid {
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
@@ -5,20 +38,23 @@
 }
 
 .exercise-card {
-  border: 1px solid #ddd;
+  border: 2px solid rgb(36, 3, 3);
   border-radius: 10px;
   padding: 10px;
   cursor: pointer;
   transition: background-color 0.3s ease;
+  background-color: #fff;
 }
 
 .exercise-card:hover {
-  background-color: #f5f5f5;
+  background-color: #82dccc;
 }
 
 .exercise-image {
   width: 100%;
   border-radius: 10px 10px 0 0;
+  border: 2px solid ;
+
 }
 
 .exercise-card h3 {
@@ -27,6 +63,7 @@
   color: #333;
 }
 
+/* Modal Styles */
 .modal-background {
   position: fixed;
   top: 0;
@@ -37,13 +74,14 @@
   display: flex;
   justify-content: center;
   align-items: center;
+  z-index: 1001;
 }
 
 .read-more-button {
   display: block;
   margin: 20px auto;
   padding: 12px 24px;
-  background-color: #007bff;
+  background-color: #10734E; /* Adjusted color for better contrast */
   color: #fff;
   border: none;
   border-radius: 5px;
@@ -52,26 +90,29 @@
 }
 
 .read-more-button:hover {
-  background-color: #0056b3;
+  background-color: #08583C; /* Darker shade for hover state */
 }
 
 .modal {
-  background-color: #fff;
+  background-color: rgba(255, 255, 255, 0.9);
   padding: 20px;
   border-radius: 10px;
   width: 80%;
-  max-width: 600px;
+  height: 80vh;
+  max-width: 800px;
   box-shadow: 0 0 20px rgba(0, 0, 0, 0.2);
   position: relative;
+  display: flex;
+  flex-direction: column;
 }
 
 .close-button {
   position: absolute;
   top: 10px;
   right: 10px;
-  font-size: 24px;
+  font-size: 40px;
   cursor: pointer;
-  color: #999;
+  color: rgb(9, 9, 9);
 }
 
 .close-button:hover {
@@ -79,18 +120,31 @@
 }
 
 .modal h2 {
-  margin-top: 0;
-  font-size: 28px;
+  font-size: 30px;
   color: #333;
+  text-align: center;
+}
+
+.modal-content {
+  display: flex;
+  flex-direction: row;
+  align-items: flex-start;
+  margin-top: 20px;
 }
 
 .modal-image {
-  width: 100%;
+  width: 50%;
   border-radius: 10px;
-  margin-bottom: 15px;
+  margin-right: 20px;
 }
 
+.exercise-details {
+  width: 50%;
+}
+
+
 .exercise-details p {
-  color: #666;
+  color: rgb(12, 12, 12);
   line-height: 1.6;
+  font-size: 1.2rem;
 }

@@ -16,6 +16,8 @@ import GuerreroAvanzado from '../src/components/PlandeEjercicios/GuerreroAvanzad
 import PlanSelection from '../src/components/PlanSelection/PlanSelection';
 import PlanCRUD from '../src/components/PlanCRUD/PlanCRUD';
 import CreatePlan from '../src/components/PlanCRUD/CreatePlan';
+import UpdatePlan from '../src/components/PlanCRUD/UpdatePlan';
+
 
 const App = () => {  
   const [user, setUser] = useState(null);
@@ -57,6 +59,12 @@ const App = () => {
     setPlans(updatedPlans);
   };
 
+  const handlePlanUpdate = (updatedPlan) => {
+    const updatedPlans = plans.map(p =>
+      p.title === updatedPlan.title ? updatedPlan : p
+    );
+    setPlans(updatedPlans);
+  };
 
   return (
     <Router>
@@ -81,7 +89,7 @@ const App = () => {
             <>
              <Route path="/plan-crud" element={<PlanCRUD plan={selectedPlan} plans={plans} />} />
               <Route path="/create-plan" element={<CreatePlan plan={selectedPlan} onCreatePlan={handlePlanCreate} />} />
-          
+              <Route path="/update-plan" element={<UpdatePlan plan={selectedPlan} plans={plans} onUpdatePlan={handlePlanUpdate} />} />
           </>
           )}
         </Routes>
