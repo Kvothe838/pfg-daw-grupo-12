@@ -87,7 +87,7 @@ const App = () => {
             <>
              <Route path="/plan-crud" element={<PlanCRUD plan={selectedPlan} plans={plans} />} />
              <Route path="/create-plan" element={<CreatePlan onCreate={handlePlanCreate} selectedPlan={selectedPlan} />} />
-        <Route path="/update-plan/:id" element={<UpdatePlan onUpdate={handlePlanUpdate} plans={plans} />} />
+             <Route path="/update-plan" element={<UpdatePlan onUpdate={handlePlanUpdate} plans={plans} />} />
           </>
           )}
         </Routes>

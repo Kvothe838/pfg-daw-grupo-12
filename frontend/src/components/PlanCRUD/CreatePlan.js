@@ -1,39 +1,28 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
+import { v4 as uuidv4 } from 'uuid'; 
 import './CreatePlan.css';
 
-const CreatePlan = ({ plan, onCreatePlan }) => {
+const CreatePlan = ({ selectedPlan , onCreate }) => {
   const [title, setTitle] = useState('');
   const [description, setDescription] = useState('');
   const [details, setDetails] = useState('');
   const [message, setMessage] = useState('');
   const navigate = useNavigate();
 
-  const handleSave = (e) => {
-    e.preventDefault();
+  const handleCreate = () => {
     const newPlan = {
+      id: uuidv4(), // Add this line to generate a unique ID
       title,
       description,
       details,
-      planType: plan,
+      type: selectedPlan,
     };
-
-    fetch('https://jsonplaceholder.typicode.com/posts', {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify(newPlan),
-    })
-      .then(response => response.json())
-      .then(data => {
-        console.log('Plan created', data);
-        onCreatePlan(newPlan); // Update the state with the new plan
-        setMessage('Plan created successfully');
-      })
-      .catch(error => {
-        console.error('Error creating plan:', error);
-      });
+    onCreate(newPlan);
+    setTitle('');
+    setDescription('');
+    setDetails('');
+    navigate('/plan-selection');
   };
 
   const handleCloseModal = () => {
@@ -43,12 +32,12 @@ const CreatePlan = ({ plan, onCreatePlan }) => {
 
   return (
     <div className='containes'>
-      <h2>Create a new plan for {plan}</h2>
+      <h2>Create a new plan for {selectedPlan}</h2>
       <form>
         <label>
           Title:
           <input
-            value={plan}
+            value={selectedPlan}
           />
         </label>
         <br />
@@ -64,11 +53,11 @@ const CreatePlan = ({ plan, onCreatePlan }) => {
           Full Diet Plan:
           <textarea
             value={details}
-            onChange={(e) => setDetails(e.target.value) } rows={4} cols={40}
+            onChange={(e) => setDetails(e.target.value)}
           />
         </label>
         <br />
-        <button type="button" onClick={handleSave}>
+        <button type="button" onClick={handleCreate}>
           Save
         </button>
         <button type="button" onClick={handleCloseModal}>

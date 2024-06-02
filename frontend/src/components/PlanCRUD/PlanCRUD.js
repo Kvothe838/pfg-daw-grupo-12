@@ -16,6 +16,7 @@ const PlanCRUD = ({ plan, plans }) => {
       navigate('/create-plan');
     } else {
       // Handle other operations if needed
+      navigate('/update-plan');
     }
   };
 

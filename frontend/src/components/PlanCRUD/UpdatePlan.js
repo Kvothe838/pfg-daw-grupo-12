@@ -1,79 +1,75 @@
-// src/components/PlanCRUD/UpdatePlan.js
+// src/components/UpdatePlan/UpdatePlan.js
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
+import './UpdatePlan.css';
 
-const UpdatePlan = ({ plan, plans, onUpdatePlan }) => {
-  const [selectedPlan, setSelectedPlan] = useState(null);
+const UpdatePlan = ({ onUpdate, plans }) => {
+  const [selectedPlanId, setSelectedPlanId] = useState(null);
   const [title, setTitle] = useState('');
   const [description, setDescription] = useState('');
-  const [details, setDetails] = useState('');
+  const [fullPlan, setFullPlan] = useState('');
   const navigate = useNavigate();
 
-  const handlePlanSelect = (e) => {
-    const plan = plans.find(p => p.title === e.target.value);
-    setSelectedPlan(plan);
+  const handleSelectPlan = (id) => {
+    const plan = plans.find(plan => plan.id === id);
+    setSelectedPlanId(id);
     setTitle(plan.title);
     setDescription(plan.description);
-    setDetails(plan.details);
+    setFullPlan(plan.fullPlan);
   };
 
-  const handleUpdate = (e) => {
-    e.preventDefault();
+  const handleSave = () => {
     const updatedPlan = {
-      ...selectedPlan,
+      id: selectedPlanId,
       title,
       description,
-      details,
+      fullPlan,
+      type: plans.find(plan => plan.id === selectedPlanId).type,
     };
-
-    onUpdatePlan(updatedPlan);
+    onUpdate(updatedPlan);
+    setTitle('');
+    setDescription('');
+    setFullPlan('');
+    setSelectedPlanId(null);
     navigate('/plan-selection');
   };
 
   return (
-    <div>
-      <h2>Update a plan for {plan}</h2>
-      <select onChange={handlePlanSelect}>
-        <option value="">Select Plan</option>
-        {plans
-          .filter(p => p.planType === plan)
-          .map((p, index) => (
-            <option key={index} value={p.title}>
-              {p.title}
-            </option>
-          ))}
-      </select>
-      {selectedPlan && (
-        <form>
-          <label>
-            Title:
-            <input
-              type="text"
-              value={title}
-              onChange={(e) => setTitle(e.target.value)}
-            />
-          </label>
-          <br />
-          <label>
-            Description:
-            <textarea
-              value={description}
-              onChange={(e) => setDescription(e.target.value)}
-            />
-          </label>
-          <br />
-          <label>
-            Full Diet Plan:
-            <textarea
-              value={details}
-              onChange={(e) => setDetails(e.target.value)}
-            />
-          </label>
-          <br />
-          <button type="button" onClick={handleUpdate}>
-            Update
-          </button>
-        </form>
+    <div className="update-plan-container">
+      {!selectedPlanId ? (
+        <>
+          <h2>Select Plan to Update</h2>
+          <ul>
+            {plans.map(plan => (
+              <li key={plan.id} onClick={() => handleSelectPlan(plan.id)}>
+                {plan.title}
+              </li>
+            ))}
+          </ul>
+        </>
+      ) : (
+        <>
+          <h2>Update Plan</h2>
+          <input
+            type="text"
+            placeholder="Title"
+            value={title}
+            onChange={(e) => setTitle(e.target.value)}
+          />
+          <input
+            type="text"
+            placeholder="Description"
+            value={description}
+            onChange={(e) => setDescription(e.target.value)}
+          />
+          <textarea
+            placeholder="Full Plan"
+            value={fullPlan}
+            onChange={(e) => setFullPlan(e.target.value)}
+          ></textarea>
+          <button onClick={handleSave}>Save</button>
+          <button onClick={() => setSelectedPlanId(null)}>Cancel</button>
+        </>
       )}
     </div>
   );
