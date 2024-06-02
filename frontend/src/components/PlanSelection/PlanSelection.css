@@ -16,22 +16,23 @@
 
 .heading {
   font-size: 28px;
-  margin-bottom: 180px;
+  margin-bottom: 100px;
 }
 
 .dropdowns {
   width: 100%;
-  margin-bottom: 200px;
+  margin-bottom: 280px;
   align-items: center;
 }
 
-.dropdown select {
-  font-size: 29px;
+.dropdowns select {
+  font-size: 20px;
   border: none;
   border-radius: 5px;
+  margin-left: 250px;
 }
 
-.dropdown button {
+.dropdowns button {
   padding: 10px 20px;
   font-size: 16px;
   background-color: #007bff;
@@ -42,6 +43,6 @@
   margin-top: 10px;
 }
 
-.dropdown button:hover {
+.dropdowns button:hover {
   background-color: #0056b3;
 }

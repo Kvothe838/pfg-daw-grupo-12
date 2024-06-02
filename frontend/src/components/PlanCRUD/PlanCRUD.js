@@ -1,6 +1,7 @@
 // src/components/PlanCRUD/PlanCRUD.js
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
+import './PlanCRUD.css';
 
 const PlanCRUD = ({ plan, plans }) => {
   const [operation, setOperation] = useState('');
@@ -19,8 +20,9 @@ const PlanCRUD = ({ plan, plans }) => {
   };
 
   return (
-    <div>
+    <div className='containers'> 
       <h2>Selected Plan: {plan}</h2>
+      <div className="dropdowns">
       <select value={operation} onChange={handleOperationChange}>
         <option value="">Choose operation</option>
         <option value="create">Create</option>
@@ -28,8 +30,8 @@ const PlanCRUD = ({ plan, plans }) => {
         <option value="delete">Delete</option>
       </select>
       {operation && <button onClick={handleSelect}>Select</button>}
+      </div>
 
-      <h3>Existing Plans:</h3>
       <ul>
         {plans
           .filter(p => p.planType === plan)
