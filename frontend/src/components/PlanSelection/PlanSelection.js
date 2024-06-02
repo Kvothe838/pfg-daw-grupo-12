@@ -9,7 +9,7 @@ const PlanSelection = ({ onSelectPlan }) => {
 
   const handleAccept = () => {
     onSelectPlan(selectedLevel);
-    navigate('/plan-crud');
+    navigate('/update-plan');
   };
 
   return (

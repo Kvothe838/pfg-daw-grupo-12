@@ -64,6 +64,15 @@ const App = () => {
     setPlans(plans.map(plan => plan.id === updatedPlan.id ? updatedPlan : plan));
   };
 
+  const handleDelete = (id) => {
+    setPlans(plans.filter(plan => plan.id !== id));
+  };
+
+  const handleSelectPlan = (id) => {
+    const selected = plans.find(plan => plan.id === id);
+    setSelectedPlan(selected ? selected.planType : '');
+  };
+
   return (
     <Router>
       <div>
@@ -85,7 +94,7 @@ const App = () => {
           <Route path="/plan-selection" element={<PlanSelection onSelectPlan={handlePlanSelect} />} />
           {selectedPlan && (
             <>
-             <Route path="/plan-crud" element={<PlanCRUD plan={selectedPlan} plans={plans} />} />
+             <Route path="/plan-crud" element={<PlanCRUD plans={plans} onDelete={handleDelete} onSelectPlan={handleSelectPlan} />} />
              <Route path="/create-plan" element={<CreatePlan onCreate={handlePlanCreate} selectedPlan={selectedPlan} />} />
              <Route path="/update-plan" element={<UpdatePlan onUpdate={handlePlanUpdate} plans={plans} />} />
           </>

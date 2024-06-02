@@ -2,46 +2,50 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import './PlanCRUD.css';
+import Modal from '../Modal/Modal';
 
-const PlanCRUD = ({ plan, plans }) => {
-  const [operation, setOperation] = useState('');
+const PlanCRUD = ({ plans, onDelete, onSelectPlan }) => {
   const navigate = useNavigate();
+  const [selectedPlanId, setSelectedPlanId] = useState(null);
+  const [showModal, setShowModal] = useState(false);
+  const [modalMessage, setModalMessage] = useState('');
 
-  const handleOperationChange = (e) => {
-    setOperation(e.target.value);
+  const handleDelete = (id) => {
+    onDelete(id);
+    setModalMessage('Plan deleted successfully!');
+    setShowModal(true);
   };
 
-  const handleSelect = () => {
-    if (operation === 'create') {
-      navigate('/create-plan');
-    } else {
-      // Handle other operations if needed
-      navigate('/update-plan');
-    }
+  const handleUpdate = (id) => {
+    onSelectPlan(id);
+    navigate('/update-plan');
+  };
+
+  const handleCreate = () => {
+    navigate('/create-plan');
+  };
+
+  const closeModal = () => {
+    setShowModal(false);
+    setModalMessage('');
   };
 
   return (
-    <div className='containers'> 
-      <h2>Selected Plan: {plan}</h2>
-      <div className="dropdowns">
-      <select value={operation} onChange={handleOperationChange}>
-        <option value="">Choose operation</option>
-        <option value="create">Create</option>
-        <option value="update">Update</option>
-        <option value="delete">Delete</option>
-      </select>
-      {operation && <button onClick={handleSelect}>Select</button>}
-      </div>
-
-      <ul>
-        {plans
-          .filter(p => p.planType === plan)
-          .map((p, index) => (
-            <li key={index}>
-              {p.title}: {p.description}
-            </li>
-          ))}
+    <div className='containers'>
+      <h2>Plans</h2>
+      <button onClick={handleCreate} className="button create-button">Create New Plan</button>
+      <ul className="plan-list">
+        {plans.map(plan => (
+          <li key={plan.id} className="plan-item">
+            <span>{plan.title}</span>
+            <button onClick={() => handleUpdate(plan.id)} className="button update-button">Update</button>
+            <button onClick={() => handleDelete(plan.id)} className="button delete-button">Delete</button>
+          </li>
+        ))}
       </ul>
+      {showModal && (
+        <Modal message={modalMessage} onClose={closeModal} />
+      )}
     </div>
   );
 };

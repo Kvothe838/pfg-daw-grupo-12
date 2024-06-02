@@ -1,49 +1,52 @@
-/* PlanSelection.css */
+/* src/components/PlanCRUD/PlanCRUD.css */
 .containers {
-    background-image: url("../../assets//blur.jpg");
-    background-size: cover;
-    background-position: center;
-    height: 70vh;
-    margin-top: 10%;
-    margin-left: 28%;
-    width: 50%;
     display: flex;
     flex-direction: column;
-    justify-content: center;
     align-items: center;
     padding: 20px;
   }
   
-  .heading {
-    font-size: 28px;
-    margin-bottom: 100px;
-  }
-  
-  .dropdowns {
+  .plan-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
     width: 100%;
-    margin-bottom: 280px;
+    max-width: 500px;
+  }
+  
+  .plan-item {
+    display: flex;
+    justify-content: space-between;
     align-items: center;
+    background-color: #f9f9f9;
+    border: 1px solid #ddd;
+    padding: 10px;
+    margin-bottom: 10px;
+    border-radius: 4px;
   }
   
-  .dropdowns select {
-    font-size: 20px;
+  .button {
+    padding: 5px 10px;
+    margin-left: 5px;
     border: none;
-    border-radius: 5px;
-    margin-left: 250px;
-  }
-  
-  .dropdowns button {
-    padding: 10px 20px;
-    font-size: 16px;
-    background-color: #007bff;
-    color: white;
-    border: none;
-    border-radius: 5px;
+    border-radius: 4px;
     cursor: pointer;
-    margin-top: 10px;
+    font-size: 14px;
   }
   
-  .dropdowns button:hover {
-    background-color: #0056b3;
+  .create-button {
+    background-color: #2196f3;
+    color: white;
+    margin-bottom: 20px;
+  }
+  
+  .update-button {
+    background-color: #4caf50;
+    color: white;
+  }
+  
+  .delete-button {
+    background-color: #f44336;
+    color: white;
   }
   
