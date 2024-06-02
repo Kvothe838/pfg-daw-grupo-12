@@ -1,4 +1,3 @@
-// src/components/PlanCRUD/PlanCRUD.js
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import './PlanCRUD.css';
@@ -6,7 +5,6 @@ import Modal from '../Modal/Modal';
 
 const PlanCRUD = ({ plans, onDelete, onSelectPlan }) => {
   const navigate = useNavigate();
-  const [selectedPlanId, setSelectedPlanId] = useState(null);
   const [showModal, setShowModal] = useState(false);
   const [modalMessage, setModalMessage] = useState('');
 
@@ -17,8 +15,7 @@ const PlanCRUD = ({ plans, onDelete, onSelectPlan }) => {
   };
 
   const handleUpdate = (id) => {
-    onSelectPlan(id);
-    navigate('/update-plan');
+    navigate(`/update-plan/${id}`);
   };
 
   const handleCreate = () => {

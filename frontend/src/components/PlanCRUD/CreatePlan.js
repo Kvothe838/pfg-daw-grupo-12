@@ -12,32 +12,30 @@ const CreatePlan = ({ selectedPlan , onCreate }) => {
 
   const handleCreate = () => {
     const newPlan = {
-      id: uuidv4(), // Add this line to generate a unique ID
+      id: uuidv4(),
       title,
       description,
       details,
-      type: selectedPlan,
+      planType: selectedPlan,
     };
     onCreate(newPlan);
-    setTitle('');
-    setDescription('');
-    setDetails('');
-    navigate('/plan-selection');
+    setMessage('Plan created successfully!');
   };
 
   const handleCloseModal = () => {
     setMessage('');
-    navigate('/plan-selection');
+    navigate('/plan-crud');
   };
 
   return (
-    <div className='containes'>
+    <div className='containers'>
       <h2>Create a new plan for {selectedPlan}</h2>
       <form>
         <label>
           Title:
           <input
-            value={selectedPlan}
+            value={title}
+            onChange={(e) => setTitle(e.target.value)}
           />
         </label>
         <br />

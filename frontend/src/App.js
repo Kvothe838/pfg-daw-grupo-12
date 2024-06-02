@@ -18,7 +18,6 @@ import PlanCRUD from '../src/components/PlanCRUD/PlanCRUD';
 import CreatePlan from '../src/components/PlanCRUD/CreatePlan';
 import UpdatePlan from '../src/components/PlanCRUD/UpdatePlan';
 
-
 const App = () => {  
   const [user, setUser] = useState(null);
   const [selectedPlan, setSelectedPlan] = useState('');
@@ -27,15 +26,6 @@ const App = () => {
     return savedPlans ? JSON.parse(savedPlans) : [];
   });
 
-  // Load plans from local storage when the component mounts
-  // useEffect(() => {
-  //   const savedPlans = JSON.parse(localStorage.getItem('plans'));
-  //   if (savedPlans) {
-  //     setPlans(savedPlans);
-  //   }
-  // }, []);
-
-  // Save plans to local storage whenever the plans state changes
   useEffect(() => {
     localStorage.setItem('plans', JSON.stringify(plans));
   }, [plans]);
@@ -52,6 +42,7 @@ const App = () => {
     setUser(null);
     setSelectedPlan(null);
   };
+
   const handlePlanSelect = (planType) => {
     setSelectedPlan(planType);
   };
@@ -88,16 +79,16 @@ const App = () => {
           <Route path="/about" element={<About />} />
           <Route path="/ejercicios" element={<Excercise />} />
           <Route path="/guerrero-principiante" element={<GuerreroPrincipiante plans={plans.filter(p => p.planType === 'Guerrero principiante')} />} />
-<Route path="/guerrero-intermedio" element={<GuerreroIntermedio plans={plans.filter(p => p.planType === 'Guerrero intermedio')} />} />
-<Route path="/guerrero-avanzado" element={<GuerreroAvanzado plans={plans.filter(p => p.planType === 'Guerrero avanzado')} />} />
+          <Route path="/guerrero-intermedio" element={<GuerreroIntermedio plans={plans.filter(p => p.planType === 'Guerrero intermedio')} />} />
+          <Route path="/guerrero-avanzado" element={<GuerreroAvanzado plans={plans.filter(p => p.planType === 'Guerrero avanzado')} />} />
 
           <Route path="/plan-selection" element={<PlanSelection onSelectPlan={handlePlanSelect} />} />
           {selectedPlan && (
             <>
-             <Route path="/plan-crud" element={<PlanCRUD plans={plans} onDelete={handleDelete} onSelectPlan={handleSelectPlan} />} />
-             <Route path="/create-plan" element={<CreatePlan onCreate={handlePlanCreate} selectedPlan={selectedPlan} />} />
-             <Route path="/update-plan" element={<UpdatePlan onUpdate={handlePlanUpdate} plans={plans} />} />
-          </>
+              <Route path="/plan-crud" element={<PlanCRUD plans={plans.filter(p => p.planType === selectedPlan)} onDelete={handleDelete} onSelectPlan={handleSelectPlan} />} />
+              <Route path="/create-plan" element={<CreatePlan onCreate={handlePlanCreate} selectedPlan={selectedPlan} />} />
+              <Route path="/update-plan/:id" element={<UpdatePlan onUpdate={handlePlanUpdate} plans={plans} />} />
+            </>
           )}
         </Routes>
       </div>

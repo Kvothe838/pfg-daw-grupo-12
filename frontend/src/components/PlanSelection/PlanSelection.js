@@ -1,4 +1,3 @@
-// src/components/PlanSelection/PlanSelection.js
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import './PlanSelection.css';
@@ -9,7 +8,7 @@ const PlanSelection = ({ onSelectPlan }) => {
 
   const handleAccept = () => {
     onSelectPlan(selectedLevel);
-    navigate('/update-plan');
+    navigate('/plan-crud');
   };
 
   return (
