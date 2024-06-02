@@ -21,11 +21,11 @@
     margin: 10px auto 0;
   }
   
-  .containes {
+  .containers {
     background-image: url("../../assets//blur.jpg");
     background-size: cover;
     background-position: center;
-    height: 70vh;
+    height: 80vh;
     margin-top: 10%;
     width: 100%;
     display: flex;
@@ -33,4 +33,49 @@
     justify-content: center;
     align-items: center;
     padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
   }
+
+
+.containers h2 {
+  text-align: center;
+  margin-top: 0%;
+}
+
+.form-label {
+  display: block;
+  margin-bottom: 5px;
+}
+
+.form-input {
+  width: 100%;
+  padding: 10px;
+  margin-bottom: 15px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+}
+
+.form-textarea {
+  width: 100%;
+  padding: 10px;
+  height: 150px; /* Set desired height */
+  margin-bottom: 15px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+}
+
+.form-button {
+  display: inline-block;
+  padding: 10px 20px;
+  background-color: #007bff; /* Blue button */
+  color: #fff; /* White text */
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.form-button:hover {
+  background-color: #0056b3; /* Darker blue on hover */
+}

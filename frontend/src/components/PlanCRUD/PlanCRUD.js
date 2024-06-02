@@ -3,7 +3,7 @@ import { useNavigate } from 'react-router-dom';
 import './PlanCRUD.css';
 import Modal from '../Modal/Modal';
 
-const PlanCRUD = ({ plans, onDelete, onSelectPlan }) => {
+const PlanCRUD = ({ plans, onDelete, selectedPlan }) => {
   const navigate = useNavigate();
   const [showModal, setShowModal] = useState(false);
   const [modalMessage, setModalMessage] = useState('');
@@ -25,11 +25,12 @@ const PlanCRUD = ({ plans, onDelete, onSelectPlan }) => {
   const closeModal = () => {
     setShowModal(false);
     setModalMessage('');
+    navigate('/plan-selection');
   };
 
   return (
     <div className='containers'>
-      <h2>Plans</h2>
+      <h2>Plans for {selectedPlan} </h2>
       <button onClick={handleCreate} className="button create-button">Create New Plan</button>
       <ul className="plan-list">
         {plans.map(plan => (

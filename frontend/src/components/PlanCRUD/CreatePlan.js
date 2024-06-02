@@ -31,37 +31,40 @@ const CreatePlan = ({ selectedPlan , onCreate }) => {
     <div className='containers'>
       <h2>Create a new plan for {selectedPlan}</h2>
       <form>
-        <label>
-          Title:
-          <input
-            value={title}
-            onChange={(e) => setTitle(e.target.value)}
-          />
-        </label>
-        <br />
-        <label>
-          Description:
-          <input
-            value={description}
-            onChange={(e) => setDescription(e.target.value)}
-          />
-        </label>
-        <br />
-        <label>
-          Full Diet Plan:
-          <textarea
-            value={details}
-            onChange={(e) => setDetails(e.target.value)}
-          />
-        </label>
-        <br />
-        <button type="button" onClick={handleCreate}>
-          Save
-        </button>
-        <button type="button" onClick={handleCloseModal}>
-          Cancel
-        </button>
-      </form>
+    <label className="form-label">
+      Title:
+      <input
+        className="form-input"
+        value={title}
+        onChange={(e) => setTitle(e.target.value)}
+      />
+    </label>
+    <br />
+    <label className="form-label">
+      Description:
+      <input
+        className="form-input"
+        value={description}
+        onChange={(e) => setDescription(e.target.value)}
+      />
+    </label>
+    <br />
+    <label className="form-label">
+      Full Diet Plan:
+      <textarea
+        className="form-textarea"
+        value={details}
+        onChange={(e) => setDetails(e.target.value)}
+      />
+    </label>
+    <br />
+    <button type="button" className="form-button" onClick={handleCreate}>
+      Save
+    </button>
+    <button type="button" className="form-button" onClick={handleCloseModal}>
+      Cancel
+    </button>
+  </form>
       {message && (
         <div className="modal">
           <p>{message}</p>

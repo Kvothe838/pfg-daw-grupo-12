@@ -12,15 +12,17 @@ const PlanSelection = ({ onSelectPlan }) => {
   };
 
   return (
-    <div className='containers'>
-      <h2>Elige el nivel que más se adapte a ti</h2>
+    <div className='containes'>
+      <h2 className='heading'>Elige el nivel que más se adapte a ti</h2>
+      <div className='dropdowns'>
       <select value={selectedLevel} onChange={(e) => setSelectedLevel(e.target.value)}>
         <option value="">Elige algún plan</option>
         <option value="Guerrero principiante">Guerrero principiante</option>
         <option value="Guerrero intermedio">Guerrero intermedio</option>
         <option value="Guerrero avanzado">Guerrero avanzado</option>
       </select>
-      <button onClick={handleAccept}>Aceptar</button>
+      </div>
+      <button className='btn' onClick={handleAccept}>Aceptar</button>
     </div>
   );
 };
