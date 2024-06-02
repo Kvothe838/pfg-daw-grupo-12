@@ -13,6 +13,7 @@
   .modal p {
     margin: 0;
     padding: 10px 0;
+    color: black;
   }
   
   .modal button {
@@ -20,3 +21,16 @@
     margin: 10px auto 0;
   }
   
+  .containes {
+    background-image: url("../../assets//blur.jpg");
+    background-size: cover;
+    background-position: center;
+    height: 70vh;
+    margin-top: 10%;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding: 20px;
+  }

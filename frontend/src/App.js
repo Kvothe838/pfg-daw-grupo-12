@@ -21,16 +21,19 @@ import UpdatePlan from '../src/components/PlanCRUD/UpdatePlan';
 
 const App = () => {  
   const [user, setUser] = useState(null);
-  const [selectedPlan, setSelectedPlan] = useState(null);
-  const [plans, setPlans] = useState([]);
+  const [selectedPlan, setSelectedPlan] = useState('');
+  const [plans, setPlans] = useState(() => {
+    const savedPlans = localStorage.getItem('plans');
+    return savedPlans ? JSON.parse(savedPlans) : [];
+  });
 
   // Load plans from local storage when the component mounts
-  useEffect(() => {
-    const savedPlans = JSON.parse(localStorage.getItem('plans'));
-    if (savedPlans) {
-      setPlans(savedPlans);
-    }
-  }, []);
+  // useEffect(() => {
+  //   const savedPlans = JSON.parse(localStorage.getItem('plans'));
+  //   if (savedPlans) {
+  //     setPlans(savedPlans);
+  //   }
+  // }, []);
 
   // Save plans to local storage whenever the plans state changes
   useEffect(() => {
@@ -49,21 +52,16 @@ const App = () => {
     setUser(null);
     setSelectedPlan(null);
   };
-
-  const handlePlanSelect = (plan) => {
-    setSelectedPlan(plan);
+  const handlePlanSelect = (planType) => {
+    setSelectedPlan(planType);
   };
 
   const handlePlanCreate = (newPlan) => {
-    const updatedPlans = [...plans, newPlan];
-    setPlans(updatedPlans);
+    setPlans([...plans, newPlan]);
   };
 
   const handlePlanUpdate = (updatedPlan) => {
-    const updatedPlans = plans.map(p =>
-      p.title === updatedPlan.title ? updatedPlan : p
-    );
-    setPlans(updatedPlans);
+    setPlans(plans.map(plan => plan.id === updatedPlan.id ? updatedPlan : plan));
   };
 
   return (
@@ -88,8 +86,8 @@ const App = () => {
           {selectedPlan && (
             <>
              <Route path="/plan-crud" element={<PlanCRUD plan={selectedPlan} plans={plans} />} />
-              <Route path="/create-plan" element={<CreatePlan plan={selectedPlan} onCreatePlan={handlePlanCreate} />} />
-              <Route path="/update-plan" element={<UpdatePlan plan={selectedPlan} plans={plans} onUpdatePlan={handlePlanUpdate} />} />
+             <Route path="/create-plan" element={<CreatePlan onCreate={handlePlanCreate} selectedPlan={selectedPlan} />} />
+        <Route path="/update-plan/:id" element={<UpdatePlan onUpdate={handlePlanUpdate} plans={plans} />} />
           </>
           )}
         </Routes>

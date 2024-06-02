@@ -42,21 +42,19 @@ const CreatePlan = ({ plan, onCreatePlan }) => {
   };
 
   return (
-    <div>
+    <div className='containes'>
       <h2>Create a new plan for {plan}</h2>
       <form>
         <label>
           Title:
           <input
-            type="text"
-            value={title}
-            onChange={(e) => setTitle(e.target.value)}
+            value={plan}
           />
         </label>
         <br />
         <label>
           Description:
-          <textarea
+          <input
             value={description}
             onChange={(e) => setDescription(e.target.value)}
           />
@@ -66,7 +64,7 @@ const CreatePlan = ({ plan, onCreatePlan }) => {
           Full Diet Plan:
           <textarea
             value={details}
-            onChange={(e) => setDetails(e.target.value)}
+            onChange={(e) => setDetails(e.target.value) } rows={4} cols={40}
           />
         </label>
         <br />
