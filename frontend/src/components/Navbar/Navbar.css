@@ -30,7 +30,7 @@
 
 .nav .links button,
 .nav .links a {
-  background-color: rgba(127, 234, 203, 0.41); /* Change button background color */
+  background-color: rgb(52, 88, 78); /* Change button background color */
   color: white;
   border: solid;
   cursor: pointer;
