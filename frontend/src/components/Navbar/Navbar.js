@@ -32,14 +32,7 @@ const Navbar = ({ email, onLogout }) => {
             <Link to="/">Inicio</Link>
             <Link to="/about">Nosotros</Link>
             <Link to="/contact">Contact Us</Link>
-            <div className="dropdown">
-              <Link className="dropbtn">Plan</Link>
-              <div className="dropdown-content">
-                <Link to="/guerrero-principiante">Guerrero Principiante</Link>
-                <Link to="/guerrero-intermedio">Guerrero Intermedio</Link>
-                <Link to="/guerrero-avanzado">Guerrero Avanzado</Link>
-              </div>
-            </div>
+            <Link to="/plans">Plan</Link>
             <div className="dropdown">
               <Link className="dropbtn">Services</Link>
               <div className="dropdown-content">

@@ -17,6 +17,7 @@ import PlanSelection from '../src/components/PlanSelection/PlanSelection';
 import PlanCRUD from '../src/components/PlanCRUD/PlanCRUD';
 import CreatePlan from '../src/components/PlanCRUD/CreatePlan';
 import UpdatePlan from '../src/components/PlanCRUD/UpdatePlan';
+import Plan from '../src/components/Navbar/Plan';
 
 const App = () => {  
   const [user, setUser] = useState(null);
@@ -77,6 +78,7 @@ const App = () => {
           <Route path="/footer" element={<Footer />} />
           <Route path="/contact" element={<Contact />} />
           <Route path="/about" element={<About />} />
+          <Route path="/Plans" element={<Plan />} />
           <Route path="/ejercicios" element={<Excercise />} />
           <Route path="/guerrero-principiante" element={<GuerreroPrincipiante plans={plans.filter(p => p.planType === 'Guerrero principiante')} />} />
           <Route path="/guerrero-intermedio" element={<GuerreroIntermedio plans={plans.filter(p => p.planType === 'Guerrero intermedio')} />} />

@@ -47,8 +47,9 @@
   font-size: 1.5rem;
   line-height: 1.8;
   margin-bottom: 20px;
-  color: #fcf7f7;
+  color: black;
   text-align: justify;
+  font-weight: bold;
 }
 
 .about-content ul {
@@ -61,9 +62,9 @@
 .about-content li {
   font-size: 1.2rem;
   line-height: 1.8;
-  color: #fcf7f7;
+  color: black
 }
 
 .about-content ul li::marker {
-  color: #fcf7f7;
+  color: black;
 }

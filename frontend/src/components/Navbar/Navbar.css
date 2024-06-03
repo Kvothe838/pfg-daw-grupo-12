@@ -113,3 +113,65 @@
 .nav .profile:hover .logout {
   display: block;
 }
+
+.plan-container {
+  width: 100%;
+  background-image: url('../../assets/blur.jpg');
+  background-size: cover;
+  background-position: center;
+  padding: 50px 20px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-family: 'Roboto', sans-serif;
+}
+
+.dropdown {
+  position: relative;
+  display: inline-block;
+}
+
+.dropdown-contents {
+  display: none;
+  position: absolute;
+  background-color: #221e1e00;
+  min-width: 200px;
+  box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
+  z-index: 1;
+}
+
+.dropdown-contents a {
+  color: whitesmoke;
+  padding: 12px 16px;
+  text-decoration: none;
+  display: block;
+  font-size: 1.3rem;
+}
+
+.dropdown-contents a:hover {
+  background-color: #3b5b55;
+}
+
+.dropdown:hover .dropdown-contents {
+  display: block;
+}
+
+.plan-content {
+  max-width: 1200px;
+  background-color: #ffffff43;
+  padding: 40px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+  border-radius: 12px;
+  text-align: center;
+  height: 80vh;
+  
+}
+
+.plan-content h1 {
+  font-size: 4rem;
+  margin-bottom: 20px;
+  color: #f6faf9;
+  position: relative;
+  display: inline-block;
+  padding-bottom: 10px;
+}

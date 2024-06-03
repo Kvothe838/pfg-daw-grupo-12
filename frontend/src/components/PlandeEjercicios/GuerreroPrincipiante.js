@@ -13,7 +13,7 @@ const GuerreroPrincipiante = ({ plans }) => {
           <p>
             Diseñado especialmente para aquellos que están dando sus primeros pasos en el mundo del fitness. En este emocionante viaje, te guiaremos desde los fundamentos básicos hasta convertirte en un guerrero en forma y saludable.
           </p>
-
+{/* 
           <h2>Plan 1: Rutina de 3 días a la semana</h2>
           <div className="plan-section">
             <h3>Día 1: Entrenamiento de Cuerpo Completo</h3>
@@ -130,7 +130,7 @@ const GuerreroPrincipiante = ({ plans }) => {
 
             <h3>Día 3: Descanso Activo o Actividades de Baja Intensidad</h3>
             <p>Realiza una actividad ligera como caminar, nadar o hacer yoga durante 30-45 minutos.</p>
-          </div>
+          </div> */}
 
           
 
