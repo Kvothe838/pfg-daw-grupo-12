@@ -11,5 +11,5 @@ type Database interface {
 	UpdatePlanEjercicio(models.PlanEjercicio) error
 	DeletePlanEjercicio(planID, editadoPorID int64) error
 	GetUsuarioByEmail(email string) (*models.Usuario, error)
-	CreateUsuario(email, contrasenia string) error
+	CreateUsuario(email, nombreUsuario, contrasenia string) error
 }

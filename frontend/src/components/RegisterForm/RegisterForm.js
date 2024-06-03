@@ -25,7 +25,7 @@ const RegisterForm = ({ onRegister }) => {
   const handleSubmit = async (event) => {
     event.preventDefault();
     if (username.trim() === '') {
-      setError('Username is required.');
+      setError('Nombre de usuario requerido.');
       return;
     }
     if (!validateEmail(email)) {
@@ -37,26 +37,31 @@ const RegisterForm = ({ onRegister }) => {
       return;
     }
     if (password !== confirmPassword) {
-      setError('Passwords do not match.');
+      setError('Las contraseñas no coinciden.');
       return;
     }
     setError('');
 
     // Fake API call
     try {
-      const response = await fetch('https://jsonplaceholder.typicode.com/posts', {
+      const response = await fetch('http://localhost:8080/register', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
         },
-        body: JSON.stringify({ username, email, password }),
+        body: JSON.stringify(
+          { nombreUsuario: username, 
+          email, 
+          contrasenia: password 
+        }),
       });
-      const data = await response.json();
-      console.log('Register successful', data);
-      onRegister(data);
+      await response.text();
+      console.log('Register successful');
+      // onRegister(data);
       navigate('/login');
     } catch (error) {
-      setError('Registration failed. Please try again.');
+      setError('El registro falló. Por favor, intente nuevamente.');
+      console.log("Error on register: ", error);
     }
   };
 
@@ -64,7 +69,7 @@ const RegisterForm = ({ onRegister }) => {
     <div className="register-container">
       <div className="background"></div>
       <div className="register-form">
-        <h2>Create Account</h2>
+        <h2>Crear cuenta de administrador</h2>
         {error && <div className="error">{error}</div>}
         <form onSubmit={handleSubmit}>
           <label>Nombre de usuario:</label>

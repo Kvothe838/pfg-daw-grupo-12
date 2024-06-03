@@ -11,7 +11,7 @@ import (
 
 type authService interface {
 	Login(email, contrasenia string) (string, error)
-	Register(email, contrasenia string) error
+	Register(email, nombreUsuario, contrasenia string) error
 }
 
 func NewInteractor(auth authService, planesEjercicios planesEjerciciosService) *interactor {
@@ -23,8 +23,9 @@ func NewInteractor(auth authService, planesEjercicios planesEjerciciosService) *
 
 func (i *interactor) Register(ctx *gin.Context) {
 	var request struct {
-		Email       string `json:"email"`
-		Contrasenia string `json:"contrasenia"`
+		Email         string `json:"email"`
+		NombreUsuario string `json:"nombre_usuario"`
+		Contrasenia   string `json:"contrasenia"`
 	}
 
 	err := ctx.BindJSON(&request)
@@ -33,7 +34,7 @@ func (i *interactor) Register(ctx *gin.Context) {
 		return
 	}
 
-	err = i.auth.Register(request.Email, request.Contrasenia)
+	err = i.auth.Register(request.Email, request.NombreUsuario, request.Contrasenia)
 	if err != nil {
 		if err == errors.UsuarioExistenteErr {
 			ctx.AbortWithStatusJSON(http.StatusConflict, gin.H{
@@ -48,7 +49,6 @@ func (i *interactor) Register(ctx *gin.Context) {
 	}
 
 	ctx.Status(http.StatusOK)
-
 }
 
 func (i *interactor) Login(ctx *gin.Context) {
