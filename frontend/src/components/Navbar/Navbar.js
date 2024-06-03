@@ -31,7 +31,7 @@ const Navbar = ({ email, onLogout }) => {
           <div className="links">
             <Link to="/">Inicio</Link>
             <Link to="/about">Nosotros</Link>
-            <Link to="/contact">Contáctamos</Link>
+            <Link to="/contact">Contáctanos</Link>
             <Link to="/plans">Planes de ejercicio</Link>
             <div className="dropdown">
               <Link className="dropbtn">Servicios</Link>

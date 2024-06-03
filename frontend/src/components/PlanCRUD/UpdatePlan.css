@@ -10,6 +10,9 @@
     margin-bottom: 20px;
     color: #333;
   }
+  .label {
+color: #333;
+  }
   
   .plan-list {
     list-style: none;

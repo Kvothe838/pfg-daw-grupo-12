@@ -33,6 +33,7 @@ const UpdatePlan = ({ onUpdate, plans }) => {
   return (
     <div className="update-plan-container">
       <h2>Update Plan</h2>
+      <label> Title: </label>
       <input
         type="text"
         placeholder="Title"

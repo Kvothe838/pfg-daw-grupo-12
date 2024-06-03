@@ -39,8 +39,7 @@ const Contact = () => {
       <div className="contact-container">
         <div className="contact-content">
           <div className="contact-left">
-            <h2>Contact Us</h2>
-            <p>Need to get in touch?</p>
+            <h2>Contáctanos</h2>
           </div>
           <div className="contact-right">
             <div className="contact-form-border">
@@ -98,7 +97,7 @@ const Contact = () => {
           <div className="modal" onClick={closeModal}>
             <div className="modal-content" onClick={(e) => e.stopPropagation()}>
               <span className="close" onClick={closeModal}>&times;</span>
-              <p>Your form has been submitted successfully!</p>
+              <p>¡Su formulario ha sido enviado exitosamente!</p>
             </div>
           </div>
         )}

@@ -2,7 +2,7 @@
 
 import React, { useState } from 'react';
 import './RegisterForm.css';
-import { Link } from 'react-router-dom';
+import {  useNavigate ,Link } from 'react-router-dom';
 
 const RegisterForm = ({ onRegister }) => {
   const [username, setUsername] = useState('');
@@ -10,6 +10,7 @@ const RegisterForm = ({ onRegister }) => {
   const [password, setPassword] = useState('');
   const [confirmPassword, setConfirmPassword] = useState('');
   const [error, setError] = useState('');
+  const navigate = useNavigate();
 
   const validateEmail = (email) => {
     return email.includes('@') && email.includes('.');
@@ -51,7 +52,9 @@ const RegisterForm = ({ onRegister }) => {
         body: JSON.stringify({ username, email, password }),
       });
       const data = await response.json();
+      console.log('Register successful', data);
       onRegister(data);
+      navigate('/login');
     } catch (error) {
       setError('Registration failed. Please try again.');
     }
@@ -64,32 +67,31 @@ const RegisterForm = ({ onRegister }) => {
         <h2>Create Account</h2>
         {error && <div className="error">{error}</div>}
         <form onSubmit={handleSubmit}>
-          <label>Username:</label>
+          <label>Nombre de usuario:</label>
           <input
             type="text"
             value={username}
             onChange={(e) => setUsername(e.target.value)}
           />
-          <label>Email:</label>
+          <label>Correo electrónico:</label>
           <input
             type="email"
             value={email}
             onChange={(e) => setEmail(e.target.value)}
           />
-          <label>Password:</label>
+          <label>Contraseña:</label>
           <input
             type="password"
             value={password}
             onChange={(e) => setPassword(e.target.value)}
           />
-          <label>Confirm Password:</label>
+          <label>Confirmar Contraseña:</label>
           <input
             type="password"
             value={confirmPassword}
             onChange={(e) => setConfirmPassword(e.target.value)}
           />
-          <button type="submit">Register</button>
-          <p>Already have an account?<Link to="/login"> Log in! </Link> </p>
+          <button type="submit">Registrarse</button>
         </form>
       </div>
     </div>
