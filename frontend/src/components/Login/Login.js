@@ -81,7 +81,7 @@ const LoginForm = ({ onLogin }) => {
             required
           />
           <button type="submit">Iniciar</button>
-          <p>¿Todavía no te has registrado? <button to={'/register'}> Registrarse! </button> </p>
+          <p>¿Todavía no te has registrado? <Link to={'/register'}> Registrarse! </Link> </p>
         </form>
       </div>
     </>
