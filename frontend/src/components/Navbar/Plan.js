@@ -15,7 +15,7 @@ const Plan = () => {
                     <p>Desde entrenamientos de cuerpo completo hasta sesiones específicas de yoga, cardio o fuerza, cada plan ha sido creado por expertos en fitness para maximizar tus resultados y optimizar tu tiempo. ¡Explora nuestra variedad de planes y comienza tu viaje hacia una versión más saludable y en forma de ti mismo hoy mismo</p>
                     <p>Elige el nivel que más se adapte a ti:</p>
                     <div className="dropdown">
-              <Link className="dropbttn">Elige algún plan</Link>
+              <button className="dropbttn">Elige algún plan</button>
               <div className="dropdown-contents">
                 <Link to="/guerrero-principiante">Guerrero Principiante</Link>
                 <Link to="/guerrero-intermedio">Guerrero Intermedio</Link>
