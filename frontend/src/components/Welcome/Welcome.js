@@ -15,9 +15,9 @@ const Welcome = () => {
           <div className="background-overlay"></div>
           <div className="container">
             <h1>
-              <span>Welcome to our</span> <span className="highlight">website</span>
+              <span>Bienvenido a nuestro</span> <span className="highlight">sitio web</span>
             </h1>
-            <h2>Fitness and Nutrition Center</h2>
+            <h2>Fitness y Nutrición Centralizada</h2>
           </div>
         </div>
 
