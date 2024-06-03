@@ -16,7 +16,10 @@ Luego abrir un navegador y acceder mediante localhost:8080/
 
 - POST /register
 - POST /login
-- GET /planes-ejercicio
+- GET /planes-ejercicios
+- POST /admin/planes-ejercicios
+- PUT /admin/planes-ejercicios
+- DELETE /admin/planes-ejercicios
 
 ### Diagrama Entidad Relación 
 
