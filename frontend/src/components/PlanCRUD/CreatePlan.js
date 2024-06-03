@@ -29,10 +29,10 @@ const CreatePlan = ({ selectedPlan , onCreate }) => {
 
   return (
     <div className='containers'>
-      <h2>Create a new plan for {selectedPlan}</h2>
+      <h2>Crear un nuevo plan para {selectedPlan}</h2>
       <form>
     <label className="form-label">
-      Title:
+      Titulo:
       <input
         className="form-input"
         value={title}
@@ -41,7 +41,7 @@ const CreatePlan = ({ selectedPlan , onCreate }) => {
     </label>
     <br />
     <label className="form-label">
-      Description:
+      Descripción:
       <input
         className="form-input"
         value={description}
@@ -50,8 +50,8 @@ const CreatePlan = ({ selectedPlan , onCreate }) => {
     </label>
     <br />
     <label className="form-label">
-      Full Diet Plan:
-      <textarea
+    Plan de dieta completo:
+      <textarea cols={50} rows={50}
         className="form-textarea"
         value={details}
         onChange={(e) => setDetails(e.target.value)}
@@ -59,7 +59,7 @@ const CreatePlan = ({ selectedPlan , onCreate }) => {
     </label>
     <br />
     <button type="button" className="form-button" onClick={handleCreate}>
-      Save
+      Guardar
     </button>
     <button type="button" className="form-button" onClick={handleCloseModal}>
       Cancel

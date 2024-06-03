@@ -30,14 +30,14 @@ const PlanCRUD = ({ plans, onDelete, selectedPlan }) => {
 
   return (
     <div className='containers'>
-      <h2>Plans for {selectedPlan} </h2>
-      <button onClick={handleCreate} className="button create-button">Create New Plan</button>
+      <h2>Plans </h2>
+      <button onClick={handleCreate} className="button create-button">Crear nuevo plan</button>
       <ul className="plan-list">
         {plans.map(plan => (
           <li key={plan.id} className="plan-item">
             <span>{plan.title}</span>
-            <button onClick={() => handleUpdate(plan.id)} className="button update-button">Update</button>
-            <button onClick={() => handleDelete(plan.id)} className="button delete-button">Delete</button>
+            <button onClick={() => handleUpdate(plan.id)} className="button update-button">Editar</button>
+            <button onClick={() => handleDelete(plan.id)} className="button delete-button">Eliminar</button>
           </li>
         ))}
       </ul>

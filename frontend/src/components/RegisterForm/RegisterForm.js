@@ -64,7 +64,7 @@ const RegisterForm = ({ onRegister }) => {
     <div className="register-container">
       <div className="background"></div>
       <div className="register-form">
-        <h2>Create Account</h2>
+        <h2>Crear Cuenta</h2>
         {error && <div className="error">{error}</div>}
         <form onSubmit={handleSubmit}>
           <label>Nombre de usuario:</label>
