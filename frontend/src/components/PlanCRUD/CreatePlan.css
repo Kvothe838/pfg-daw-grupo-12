@@ -1,5 +1,5 @@
 /* src/components/PlanCRUD/CreatePlan.css */
-.modal {
+.modals {
     position: fixed;
     top: 50%;
     left: 50%;
@@ -10,13 +10,13 @@
     z-index: 1000;
   }
   
-  .modal p {
+  .modals p {
     margin: 0;
     padding: 10px 0;
     color: black;
   }
   
-  .modal button {
+  .modals button {
     display: block;
     margin: 10px auto 0;
   }

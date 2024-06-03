@@ -66,7 +66,7 @@ const CreatePlan = ({ selectedPlan , onCreate }) => {
     </button>
   </form>
       {message && (
-        <div className="modal">
+        <div className="modals">
           <p>{message}</p>
           <button onClick={handleCloseModal}>Close</button>
         </div>
