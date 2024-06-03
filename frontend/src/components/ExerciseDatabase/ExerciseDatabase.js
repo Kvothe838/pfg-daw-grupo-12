@@ -107,10 +107,10 @@ const ExerciseDatabase = () => {
         </div>
       </div>
       {selectedExercise && (
-        <div className="modal-background" onClick={closeModal}>
-          <div className="modal" onClick={(e) => e.stopPropagation()}>
+        <div className="moda-background" onClick={closeModal}>
+          <div className="moda" onClick={(e) => e.stopPropagation()}>
             <span className="close-button" onClick={closeModal}>&times;</span>
-            <img src={selectedExercise.image} alt={selectedExercise.title} className="modal-image" />
+            <img src={selectedExercise.image} alt={selectedExercise.title} className="moda-image" />
             <h2>{selectedExercise.title}</h2>
             <div className="exercise-details">
               {selectedExercise.details.map((detail, index) => (

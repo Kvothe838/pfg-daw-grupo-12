@@ -1,5 +1,5 @@
 /* src/components/Modal/Modal.css */
-.modal {
+.modals {
     position: fixed;
     top: 0;
     left: 0;
@@ -11,7 +11,7 @@
     align-items: center;
   }
   
-  .modal-content {
+  .modal-contents {
     background: #fff;
     padding: 20px;
     border-radius: 5px;
