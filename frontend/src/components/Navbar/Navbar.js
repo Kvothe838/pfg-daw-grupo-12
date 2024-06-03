@@ -31,17 +31,17 @@ const Navbar = ({ email, onLogout }) => {
           <div className="links">
             <Link to="/">Inicio</Link>
             <Link to="/about">Nosotros</Link>
-            <Link to="/contact">Contact Us</Link>
-            <Link to="/plans">Plan</Link>
+            <Link to="/contact">Contáctamos</Link>
+            <Link to="/plans">Planes de ejercicio</Link>
             <div className="dropdown">
-              <Link className="dropbtn">Services</Link>
+              <Link className="dropbtn">Servicios</Link>
               <div className="dropdown-content">
                 <Link to="/nutritional-guide">Guía Nutricional</Link>
-                <Link to="/ejercicios">Exercises</Link>
+                <Link to="/ejercicios">Ejercicios</Link>
                 <Link to="/paso">Paso a Paso</Link>
               </div>
             </div>
-            <Link to="/login">Login</Link>
+            <Link to="/login">Iniciar sesión</Link>
           </div>
         </>
       )}

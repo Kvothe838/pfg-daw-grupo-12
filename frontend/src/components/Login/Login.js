@@ -63,25 +63,25 @@ const LoginForm = ({ onLogin }) => {
     <>
       <div className="background-login"></div>
       <div className="login-form">
-        <h2>Welcome Back !!</h2>
+        <h2>Bienvenido!</h2>
         {error && <div className="error">{error}</div>}
         <form onSubmit={handleSubmit}>
-          <label>Email:</label>
+          <label>Correo electrónico:</label>
           <input
             type="email"
             value={email}
             onChange={(e) => setEmail(e.target.value)}
             required
           />
-          <label>Password:</label>
+          <label>Contraseña:</label>
           <input
             type="password"
             value={password}
             onChange={(e) => setPassword(e.target.value)}
             required
           />
-          <button type="submit">Login</button>
-          <p>Haven't Register Yourself? <Link to={'/register'}> Register Here! </Link> </p>
+          <button type="submit">Iniciar</button>
+          <p>¿Todavía no te has registrado? <button to={'/register'}> Registrarse! </button> </p>
         </form>
       </div>
     </>
