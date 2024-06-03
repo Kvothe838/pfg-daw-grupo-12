@@ -54,11 +54,12 @@ const exercises = [
 
 
 const ExerciseDatabase = () => {
-  const [visibleExercises, setVisibleExercises] = useState(10); // Show 9 exercises initially
+  const [visibleExercises, setVisibleExercises] = useState(9); // Show 9 exercises initially
   const [selectedExercise, setSelectedExercise] = useState(null);
+  const [searchQuery, setSearchQuery] = useState('');
 
   const showMoreExercises = () => {
-    setVisibleExercises(prev => prev + 8); // Show 9 more exercises when "Show More" button is clicked
+    setVisibleExercises(prev => prev + 10); // Show 9 more exercises when "Show More" button is clicked
   };
 
   const openModal = (exercise) => {
@@ -68,6 +69,14 @@ const ExerciseDatabase = () => {
   const closeModal = () => {
     setSelectedExercise(null);
   };
+  const handleSearch = (event) => {
+    setSearchQuery(event.target.value);
+  };
+
+  const filteredExercises = exercises.filter(exercise =>
+    exercise.title.toLowerCase().includes(searchQuery.toLowerCase())
+  );
+
 
   return (
     <>
@@ -75,16 +84,24 @@ const ExerciseDatabase = () => {
       <div className="exercise-container">
         <div className="exercise-content">
           <h1 className='ex'>Base de Datos de Ejercicios</h1>
+          <div className="search-bar">
+            <input
+              type="text"
+              placeholder="Buscar ejercicio..."
+              value={searchQuery}
+              onChange={handleSearch}
+            />
+          </div>
           <p >En esta sección, os enseñaremos cómo realizar los ejercicios anteriormente pautados.</p>
-          <div className="exercise-grid">
-            {exercises.slice(0, visibleExercises).map((exercise) => (
+         <div className="exercise-grid">
+            {filteredExercises.slice(0, visibleExercises).map((exercise) => (
               <div key={exercise.id} className="exercise-card" onClick={() => openModal(exercise)}>
                 <img src={exercise.image} alt={exercise.title} className="exercise-image" />
                 <h3>{exercise.title}</h3>
               </div>
             ))}
           </div>
-          {visibleExercises < exercises.length && (
+          {visibleExercises < filteredExercises.length && (
             <button className="read-more-button" onClick={showMoreExercises}>Ver más</button>
           )}
         </div>
