@@ -41,7 +41,7 @@ const Navbar = ({ email, onLogout }) => {
                 <Link to="/paso">Paso a Paso</Link>
               </div>
             </div>
-            <Link to="/login">Iniciar sesión</Link>
+            <Link to="/login">Iniciar sesión como administrador</Link>
           </div>
         </>
       )}

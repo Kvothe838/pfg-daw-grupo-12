@@ -81,7 +81,7 @@ const LoginForm = ({ onLogin }) => {
             onChange={(e) => setPassword(e.target.value)}
             required
           />
-          <button type="submit">Iniciar</button>
+          <button type="submit">Entrar</button>
           <p>¿Todavía no te has registrado? <Link to={'/register'}> Registrarse! </Link> </p>
         </form>
       </div>

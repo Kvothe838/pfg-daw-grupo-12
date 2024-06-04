@@ -196,10 +196,9 @@ func (c *conn) GetUsuarioByEmail(email string) (*models.Usuario, error) {
 		WHERE email = ?`, email)
 	var (
 		usuario models.Usuario
-		rolID   int64
 	)
 
-	err := row.Scan(&usuario.ID, &usuario.Email, &usuario.Contrasenia, &rolID, &usuario.FechaCreacion)
+	err := row.Scan(&usuario.ID, &usuario.Email, &usuario.NombreUsuario, &usuario.Contrasenia, &usuario.FechaCreacion)
 	if err != nil {
 		if err == sql.ErrNoRows {
 			return nil, nil
@@ -211,10 +210,10 @@ func (c *conn) GetUsuarioByEmail(email string) (*models.Usuario, error) {
 	return &usuario, nil
 }
 
-func (c *conn) CreateUsuario(email, contrasenia string) error {
+func (c *conn) CreateUsuario(email, nombreUsuario, contrasenia string) error {
 	_, err := c.Driver.Exec(`
-		INSERT INTO usuarios(email, contrasenia)
-		VALUES(?, ?)`, email, contrasenia)
+		INSERT INTO usuarios(email, nombre_usuario, contrasenia)
+		VALUES(?, ?, ?)`, email, nombreUsuario, contrasenia)
 	if err != nil {
 		return errors.Wrap(err, "no se pudo ejecutar query para crear usuario")
 	}
