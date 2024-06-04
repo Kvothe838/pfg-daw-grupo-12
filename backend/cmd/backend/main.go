@@ -12,13 +12,14 @@ func main() {
 	router := gin.Default()
 
 	config := cors.DefaultConfig()
-	config.AllowAllOrigins = true
+	config.AllowOrigins = []string{"http://localhost:3000"}
 	config.AllowMethods = []string{"GET", "POST", "PUT", "DELETE", "OPTIONS"}
 	config.AllowHeaders = []string{"Origin", "Content-Type", "Authorization"}
+	config.AllowCredentials = true
 
 	router.Use(cors.New(config))
 
-	dbConnection, err := mysql.NewConn("root", "root", "test")
+	dbConnection, err := mysql.NewConn("root", "", "test")
 	if err != nil {
 		panic(err)
 	}

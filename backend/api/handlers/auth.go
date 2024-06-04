@@ -11,7 +11,7 @@ import (
 
 type authService interface {
 	Login(email, contrasenia string) (string, error)
-	Register(email, contrasenia string) error
+	Register(email, nombreUsuario, contrasenia string) error
 }
 
 func NewInteractor(auth authService, planesEjercicios planesEjerciciosService) *interactor {
@@ -23,8 +23,9 @@ func NewInteractor(auth authService, planesEjercicios planesEjerciciosService) *
 
 func (i *interactor) Register(ctx *gin.Context) {
 	var request struct {
-		Email       string `json:"email"`
-		Contrasenia string `json:"contrasenia"`
+		Email         string `json:"email"`
+		NombreUsuario string `json:"nombre_usuario"`
+		Contrasenia   string `json:"contrasenia"`
 	}
 
 	err := ctx.BindJSON(&request)
@@ -33,7 +34,7 @@ func (i *interactor) Register(ctx *gin.Context) {
 		return
 	}
 
-	err = i.auth.Register(request.Email, request.Contrasenia)
+	err = i.auth.Register(request.Email, request.NombreUsuario, request.Contrasenia)
 	if err != nil {
 		if err == errors.UsuarioExistenteErr {
 			ctx.AbortWithStatusJSON(http.StatusConflict, gin.H{
@@ -48,7 +49,6 @@ func (i *interactor) Register(ctx *gin.Context) {
 	}
 
 	ctx.Status(http.StatusOK)
-
 }
 
 func (i *interactor) Login(ctx *gin.Context) {
@@ -70,7 +70,10 @@ func (i *interactor) Login(ctx *gin.Context) {
 		return
 	}
 
+	fmt.Print(request.Email, request.Contrasenia)
 	token, err := i.auth.Login(request.Email, request.Contrasenia)
+	
+	fmt.Println("error registrando usuario: ", err)
 	if err != nil {
 		if err == errors.FalloLoginErr || err == errors.SesionExpiradaErr {
 			ctx.AbortWithStatusJSON(http.StatusUnauthorized, gin.H{
@@ -85,13 +88,15 @@ func (i *interactor) Login(ctx *gin.Context) {
 
 	ctx.SetCookie("loginToken", token, 3600*24, "/", "http://localhost:3000/", false, true)
 
-	ctx.JSON(http.StatusOK, gin.H{"message": "Login exitoso"})
+	ctx.JSON(http.StatusOK, gin.H{"message": "Login exitoso", "token": token})
 }
 
 func AuthMiddleware(jwtSecretKey string) gin.HandlerFunc {
 	return func(ctx *gin.Context) {
-		tokenString, err := ctx.Cookie("loginToken")
-		if err != nil {
+		tokenString := ctx.GetHeader("Authorization")
+		// tokenString, err := ctx.Cookie("loginToken")
+		fmt.Println("hello", jwtSecretKey, tokenString)
+		if tokenString=="" {
 			ctx.AbortWithStatusJSON(http.StatusUnauthorized, gin.H{"message": "No se encontró token"})
 			return
 		}
@@ -111,6 +116,7 @@ func AuthMiddleware(jwtSecretKey string) gin.HandlerFunc {
 			return
 		}
 
+		fmt.Println("usuarioID", claims.UsuarioID)
 		ctx.Set("usuarioID", claims.UsuarioID)
 		ctx.Next()
 	}

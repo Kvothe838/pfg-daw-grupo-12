@@ -2,6 +2,7 @@ import React from 'react';
 import Navbar from '../Navbar/Navbar';
 import Footer from '../Footer/Footer';
 import './GuerreroPrincipiante.css';
+import { ManualPlans } from '../../utils/staticPlans';
 
 const GuerreroAvanzado = ({ plans }) => {
   return (
@@ -14,7 +15,7 @@ const GuerreroAvanzado = ({ plans }) => {
             Este programa está diseñado para aquellos que buscan alcanzar un nivel de condición física excepcional y convertirse en auténticos guerreros en todas las áreas de la vida. Si estás listo para desafiar tus límites y alcanzar tu máximo potencial, ¡este plan es para ti!
           </p>
 
-          <h2>Plan 1: Rutina de 3 días a la semana</h2>
+          {/* <h2>Plan 1: Rutina de 3 días a la semana</h2>
           <div className="plan-section">
             <h3>Día 1: Entrenamiento de Fuerza y Potencia</h3>
             <ol>
@@ -244,14 +245,27 @@ const GuerreroAvanzado = ({ plans }) => {
                 </ul>
               </li>
             </ol>
-          </div>
+          </div> */}
+         {
+            ManualPlans?.map((plan, index) => (
+              <>
+                <h2>{plan?.title}</h2>
+                <small>{plan?.description}</small>
+                <div className='plan-section'>
+                  {plan?.details}
+                </div>
+              </>
+            ))
+          }
 
           {plans.map((plan, index) => (
-            <div key={index} className="plan-section">
+            <>
               <h2>{plan.title}</h2>
-              <p>{plan.description}</p>
-              <div>{plan.details}</div>
-            </div>
+              <div key={index} className="plan-section">
+                <p>{plan.description}</p>
+                <div>{plan.details}</div>
+              </div>
+            </>
           ))}
 
         </div>

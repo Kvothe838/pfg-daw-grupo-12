@@ -5,6 +5,7 @@ import (
 	"pfg-daw-grupo-12-backend/backend/internal/database"
 	internal_errors "pfg-daw-grupo-12-backend/backend/internal/errors"
 	"pfg-daw-grupo-12-backend/backend/internal/models"
+	"fmt"
 )
 
 type planesEjercicios struct {
@@ -65,6 +66,7 @@ func (p *planesEjercicios) Update(planID int64, nombre, descripcion, ejercicios 
 	planExistente.Ejercicios = ejercicios
 	planExistente.EditadoPor = models.Usuario{ID: editadoPorID}
 
+	fmt.Println("hello", *planExistente)
 	err = p.DB.UpdatePlanEjercicio(*planExistente)
 	if err != nil {
 		return errors.Wrapf(err, "no se pudo actualizar plan de ejercicio con id %d", planID)

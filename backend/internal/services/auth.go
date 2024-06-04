@@ -22,7 +22,7 @@ func NewAuth(DB database.Database, jwtSecretKey string) *auth {
 	return &auth{DB: DB, JWTSecretKey: jwtSecretKey}
 }
 
-func (a *auth) Register(email, contrasenia string) error {
+func (a *auth) Register(email, nombreUsuario, contrasenia string) error {
 	usuario, err := a.DB.GetUsuarioByEmail(email)
 	if err != nil {
 		return errors.Wrap(err, "no se pudo obtener usuario por email")
@@ -34,7 +34,7 @@ func (a *auth) Register(email, contrasenia string) error {
 		return internal_errors.UsuarioExistenteErr
 	}
 
-	err = a.DB.CreateUsuario(email, contrasenia)
+	err = a.DB.CreateUsuario(email, nombreUsuario, contrasenia)
 	if err != nil {
 		return errors.Wrap(err, "no se pudo crear usuario")
 	}

@@ -48,12 +48,50 @@ const App = () => {
     setSelectedPlan(planType);
   };
 
+ 
   const handlePlanCreate = (newPlan) => {
+    const url = 'http://localhost:8080/admin/planes-ejercicios';
+    let token = localStorage.getItem("loginToken")
+    const requestOptions = {
+      method: 'POST',
+      headers: { 
+        'Content-Type': 'application/json',
+        'Authorization': `${token}`,
+      },
+      body: JSON.stringify({ Nombre: newPlan?.title, Descripcion: newPlan?.description, Ejercicios: newPlan?.details }),
+      // credentials: 'include'
+    };
+
+    fetch(url, requestOptions)
+    .then(res => {
+      console.log(res)
+    })
+    .catch(err => console.log(err))
     setPlans([...plans, newPlan]);
   };
 
   const handlePlanUpdate = (updatedPlan) => {
+    
+    const url = 'http://localhost:8080/admin/planes-ejercicios?id=2';
+    let token = localStorage.getItem("loginToken")
+    const requestOptions = {
+      method: 'PUT',
+      headers: { 
+        'Content-Type': 'application/json',
+        'Authorization': `${token}`,
+      },
+      body: JSON.stringify({ Nombre: updatedPlan?.title, Descripcion: updatedPlan?.description, Ejercicios: updatedPlan?.details }),
+      // credentials: 'include'
+    };
+
+    fetch(url, requestOptions)
+    .then(res => {
+      console.log(res)
+    })
+    .catch(err => console.log(err))
+
     setPlans(plans.map(plan => plan.id === updatedPlan.id ? updatedPlan : plan));
+
   };
 
   const handleDelete = (id) => {
